@@ -1,6 +1,10 @@
 package DifyCore
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/soulteary/dify-easy/fn"
+)
 
 type DB struct {
 	Image       string        `yaml:"image"`
@@ -19,7 +23,7 @@ type DBEnvironment struct {
 }
 
 func CreateDifyDB() DB {
-	return DB{
+	config := DB{
 		Image:   "postgres:15-alpine",
 		Restart: "always",
 		Environment: DBEnvironment{
@@ -39,11 +43,16 @@ func CreateDifyDB() DB {
 		Volumes: []string{
 			"./volumes/db/data:/var/lib/postgresql/data",
 		},
-		Healthcheck: HealthCheck{
-			Test:     []string{"CMD", "pg_isready"},
+	}
+
+	healthCheckCmd, err := Fn.GetHealthCheckCMD([]string{"CMD", "pg_isready"})
+	if err == nil {
+		config.Healthcheck = HealthCheck{
+			Test:     healthCheckCmd,
 			Interval: "1s",
 			Timeout:  "3s",
 			Retries:  30,
-		},
+		}
 	}
+	return config
 }
