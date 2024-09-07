@@ -8,7 +8,7 @@ type DB struct {
 	Environment DBEnvironment `yaml:"environment"`
 	Command     string        `yaml:"command"`
 	Volumes     []string      `yaml:"volumes"`
-	Healthcheck HealthCheck `yaml:"healthcheck"`
+	Healthcheck HealthCheck   `yaml:"healthcheck"`
 }
 
 type DBEnvironment struct {
@@ -31,10 +31,10 @@ func CreateDifyDB() DB {
 		Command: strings.Join([]string{
 			">",
 			"postgres -c 'max_connections=${POSTGRES_MAX_CONNECTIONS:-100}'",
-			"-c 'shared_buffers=${POSTGRES_SHARED_BUFFERS:-128MB}'",
-			"-c 'work_mem=${POSTGRES_WORK_MEM:-4MB}'",
-			"-c 'maintenance_work_mem=${POSTGRES_MAINTENANCE_WORK_MEM:-64MB}'",
-			"-c 'effective_cache_size=${POSTGRES_EFFECTIVE_CACHE_SIZE:-4096MB}'",
+			"         -c 'shared_buffers=${POSTGRES_SHARED_BUFFERS:-128MB}'",
+			"         -c 'work_mem=${POSTGRES_WORK_MEM:-4MB}'",
+			"         -c 'maintenance_work_mem=${POSTGRES_MAINTENANCE_WORK_MEM:-64MB}'",
+			"         -c 'effective_cache_size=${POSTGRES_EFFECTIVE_CACHE_SIZE:-4096MB}'",
 		}, "\n"),
 		Volumes: []string{
 			"./volumes/db/data:/var/lib/postgresql/data",

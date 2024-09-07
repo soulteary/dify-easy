@@ -1,8 +1,8 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/soulteary/dify-easy/deploy"
@@ -13,10 +13,16 @@ import (
 
 func main() {
 	config := Deploy.CreateConfig()
-	yamlData, err := yaml.Marshal(&config)
+
+	var buf bytes.Buffer
+	encoder := yaml.NewEncoder(&buf)
+	encoder.SetIndent(2)
+	err := encoder.Encode(config)
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		fmt.Printf("Error encoding YAML: %v\n", err)
+		return
 	}
+	yamlData := buf.String()
 
 	// Fix the YAML
 	output := Fn.FixYAML(yamlData)
