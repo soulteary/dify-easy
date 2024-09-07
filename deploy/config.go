@@ -66,6 +66,9 @@ func CreateConfig() DifyDeploy {
 	config.Services.Nginx = DifyCore.CreateDifyNginx()
 	config.Services.SsrfProxy = DifyCore.CreateDifySsrfProxy()
 
+	config.Services.Weaviate = VectorDB.CreateWeaviate()
+	config.Services.Qdrant = VectorDB.CreateQdrant()
+
 	config.Networks = DifyNetwork.CreateNetworks()
 	config.Volumes = DifyVolume.CreateVolumes()
 
