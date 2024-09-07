@@ -1,193 +1,234 @@
 package DifyCore
 
 type XSharedEnv struct {
-	LOGLEVEL                              string `yaml:"LOG_LEVEL"`
-	LOGFILE                               string `yaml:"LOG_FILE"`
-	DEBUG                                 string `yaml:"DEBUG"`
-	FLASKDEBUG                            string `yaml:"FLASK_DEBUG"`
-	SECRETKEY                             string `yaml:"SECRET_KEY"`
-	INITPASSWORD                          string `yaml:"INIT_PASSWORD"`
-	CONSOLEWEBURL                         string `yaml:"CONSOLE_WEB_URL"`
-	CONSOLEAPIURL                         string `yaml:"CONSOLE_API_URL"`
-	SERVICEAPIURL                         string `yaml:"SERVICE_API_URL"`
-	APPWEBURL                             string `yaml:"APP_WEB_URL"`
-	CHECKUPDATEURL                        string `yaml:"CHECK_UPDATE_URL"`
-	OPENAIAPIBASE                         string `yaml:"OPENAI_API_BASE"`
-	FILESURL                              string `yaml:"FILES_URL"`
-	FILESACCESSTIMEOUT                    string `yaml:"FILES_ACCESS_TIMEOUT"`
-	APPMAXACTIVEREQUESTS                  string `yaml:"APP_MAX_ACTIVE_REQUESTS"`
-	MIGRATIONENABLED                      string `yaml:"MIGRATION_ENABLED"`
-	DEPLOYENV                             string `yaml:"DEPLOY_ENV"`
-	DIFYBINDADDRESS                       string `yaml:"DIFY_BIND_ADDRESS"`
-	DIFYPORT                              string `yaml:"DIFY_PORT"`
-	SERVERWORKERAMOUNT                    string `yaml:"SERVER_WORKER_AMOUNT"`
-	SERVERWORKERCLASS                     string `yaml:"SERVER_WORKER_CLASS"`
-	CELERYWORKERCLASS                     string `yaml:"CELERY_WORKER_CLASS"`
-	GUNICORNTIMEOUT                       string `yaml:"GUNICORN_TIMEOUT"`
-	CELERYWORKERAMOUNT                    string `yaml:"CELERY_WORKER_AMOUNT"`
-	CELERYAUTOSCALE                       string `yaml:"CELERY_AUTO_SCALE"`
-	CELERYMAXWORKERS                      string `yaml:"CELERY_MAX_WORKERS"`
-	CELERYMINWORKERS                      string `yaml:"CELERY_MIN_WORKERS"`
-	APITOOLDEFAULTCONNECTTIMEOUT          string `yaml:"API_TOOL_DEFAULT_CONNECT_TIMEOUT"`
-	APITOOLDEFAULTREADTIMEOUT             string `yaml:"API_TOOL_DEFAULT_READ_TIMEOUT"`
-	DBUSERNAME                            string `yaml:"DB_USERNAME"`
-	DBPASSWORD                            string `yaml:"DB_PASSWORD"`
-	DBHOST                                string `yaml:"DB_HOST"`
-	DBPORT                                string `yaml:"DB_PORT"`
-	DBDATABASE                            string `yaml:"DB_DATABASE"`
-	SQLALCHEMYPOOLSIZE                    string `yaml:"SQLALCHEMY_POOL_SIZE"`
-	SQLALCHEMYPOOLRECYCLE                 string `yaml:"SQLALCHEMY_POOL_RECYCLE"`
-	SQLALCHEMYECHO                        string `yaml:"SQLALCHEMY_ECHO"`
-	REDISHOST                             string `yaml:"REDIS_HOST"`
-	REDISPORT                             string `yaml:"REDIS_PORT"`
-	REDISUSERNAME                         string `yaml:"REDIS_USERNAME"`
-	REDISPASSWORD                         string `yaml:"REDIS_PASSWORD"`
-	REDISUSESSL                           string `yaml:"REDIS_USE_SSL"`
-	REDISDB                               int    `yaml:"REDIS_DB"`
-	CELERYBROKERURL                       string `yaml:"CELERY_BROKER_URL"`
-	BROKERUSESSL                          string `yaml:"BROKER_USE_SSL"`
-	WEBAPICORSALLOWORIGINS                string `yaml:"WEB_API_CORS_ALLOW_ORIGINS"`
-	CONSOLECORSALLOWORIGINS               string `yaml:"CONSOLE_CORS_ALLOW_ORIGINS"`
-	STORAGETYPE                           string `yaml:"STORAGE_TYPE"`
-	STORAGELOCALPATH                      string `yaml:"STORAGE_LOCAL_PATH"`
-	S3USEAWSMANAGEDIAM                    string `yaml:"S3_USE_AWS_MANAGED_IAM"`
-	S3ENDPOINT                            string `yaml:"S3_ENDPOINT"`
-	S3BUCKETNAME                          string `yaml:"S3_BUCKET_NAME"`
-	S3ACCESSKEY                           string `yaml:"S3_ACCESS_KEY"`
-	S3SECRETKEY                           string `yaml:"S3_SECRET_KEY"`
-	S3REGION                              string `yaml:"S3_REGION"`
-	AZUREBLOBACCOUNTNAME                  string `yaml:"AZURE_BLOB_ACCOUNT_NAME"`
-	AZUREBLOBACCOUNTKEY                   string `yaml:"AZURE_BLOB_ACCOUNT_KEY"`
-	AZUREBLOBCONTAINERNAME                string `yaml:"AZURE_BLOB_CONTAINER_NAME"`
-	AZUREBLOBACCOUNTURL                   string `yaml:"AZURE_BLOB_ACCOUNT_URL"`
-	GOOGLESTORAGEBUCKETNAME               string `yaml:"GOOGLE_STORAGE_BUCKET_NAME"`
-	GOOGLESTORAGESERVICEACCOUNTJSONBASE64 string `yaml:"GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64"`
-	ALIYUNOSSBUCKETNAME                   string `yaml:"ALIYUN_OSS_BUCKET_NAME"`
-	ALIYUNOSSACCESSKEY                    string `yaml:"ALIYUN_OSS_ACCESS_KEY"`
-	ALIYUNOSSSECRETKEY                    string `yaml:"ALIYUN_OSS_SECRET_KEY"`
-	ALIYUNOSSENDPOINT                     string `yaml:"ALIYUN_OSS_ENDPOINT"`
-	ALIYUNOSSREGION                       string `yaml:"ALIYUN_OSS_REGION"`
-	ALIYUNOSSAUTHVERSION                  string `yaml:"ALIYUN_OSS_AUTH_VERSION"`
-	ALIYUNOSSPATHS                        string `yaml:"ALIYUN_OSS_PATHS"`
-	TENCENTCOSBUCKETNAME                  string `yaml:"TENCENT_COS_BUCKET_NAME"`
-	TENCENTCOSSECRETKEY                   string `yaml:"TENCENT_COS_SECRET_KEY"`
-	TENCENTCOSSECRETID                    string `yaml:"TENCENT_COS_SECRET_ID"`
-	TENCENTCOSREGION                      string `yaml:"TENCENT_COS_REGION"`
-	TENCENTCOSSCHEME                      string `yaml:"TENCENT_COS_SCHEME"`
-	OCIENDPOINT                           string `yaml:"OCI_ENDPOINT"`
-	OCIBUCKETNAME                         string `yaml:"OCI_BUCKET_NAME"`
-	OCIACCESSKEY                          string `yaml:"OCI_ACCESS_KEY"`
-	OCISECRETKEY                          string `yaml:"OCI_SECRET_KEY"`
-	OCIREGION                             string `yaml:"OCI_REGION"`
-	VECTORSTORE                           string `yaml:"VECTOR_STORE"`
-	WEAVIATEENDPOINT                      string `yaml:"WEAVIATE_ENDPOINT"`
-	WEAVIATEAPIKEY                        string `yaml:"WEAVIATE_API_KEY"`
-	QDRANTURL                             string `yaml:"QDRANT_URL"`
-	QDRANTAPIKEY                          string `yaml:"QDRANT_API_KEY"`
-	QDRANTCLIENTTIMEOUT                   string `yaml:"QDRANT_CLIENT_TIMEOUT"`
-	QDRANTGRPCENABLED                     string `yaml:"QDRANT_GRPC_ENABLED"`
-	QDRANTGRPCPORT                        string `yaml:"QDRANT_GRPC_PORT"`
-	MILVUSHOST                            string `yaml:"MILVUS_HOST"`
-	MILVUSPORT                            string `yaml:"MILVUS_PORT"`
-	MILVUSUSER                            string `yaml:"MILVUS_USER"`
-	MILVUSPASSWORD                        string `yaml:"MILVUS_PASSWORD"`
-	MILVUSSECURE                          string `yaml:"MILVUS_SECURE"`
-	MYSCALEHOST                           string `yaml:"MYSCALE_HOST"`
-	MYSCALEPORT                           string `yaml:"MYSCALE_PORT"`
-	MYSCALEUSER                           string `yaml:"MYSCALE_USER"`
-	MYSCALEPASSWORD                       string `yaml:"MYSCALE_PASSWORD"`
-	MYSCALEDATABASE                       string `yaml:"MYSCALE_DATABASE"`
-	MYSCALEFTSPARAMS                      string `yaml:"MYSCALE_FTS_PARAMS"`
-	RELYTHOST                             string `yaml:"RELYT_HOST"`
-	RELYTPORT                             string `yaml:"RELYT_PORT"`
-	RELYTUSER                             string `yaml:"RELYT_USER"`
-	RELYTPASSWORD                         string `yaml:"RELYT_PASSWORD"`
-	RELYTDATABASE                         string `yaml:"RELYT_DATABASE"`
-	PGVECTORHOST                          string `yaml:"PGVECTOR_HOST"`
-	PGVECTORPORT                          string `yaml:"PGVECTOR_PORT"`
-	PGVECTORUSER                          string `yaml:"PGVECTOR_USER"`
-	PGVECTORPASSWORD                      string `yaml:"PGVECTOR_PASSWORD"`
-	PGVECTORDATABASE                      string `yaml:"PGVECTOR_DATABASE"`
-	TIDBVECTORHOST                        string `yaml:"TIDB_VECTOR_HOST"`
-	TIDBVECTORPORT                        string `yaml:"TIDB_VECTOR_PORT"`
-	TIDBVECTORUSER                        string `yaml:"TIDB_VECTOR_USER"`
-	TIDBVECTORPASSWORD                    string `yaml:"TIDB_VECTOR_PASSWORD"`
-	TIDBVECTORDATABASE                    string `yaml:"TIDB_VECTOR_DATABASE"`
-	ORACLEHOST                            string `yaml:"ORACLE_HOST"`
-	ORACLEPORT                            string `yaml:"ORACLE_PORT"`
-	ORACLEUSER                            string `yaml:"ORACLE_USER"`
-	ORACLEPASSWORD                        string `yaml:"ORACLE_PASSWORD"`
-	ORACLEDATABASE                        string `yaml:"ORACLE_DATABASE"`
-	CHROMAHOST                            string `yaml:"CHROMA_HOST"`
-	CHROMAPORT                            string `yaml:"CHROMA_PORT"`
-	CHROMATENANT                          string `yaml:"CHROMA_TENANT"`
-	CHROMADATABASE                        string `yaml:"CHROMA_DATABASE"`
-	CHROMAAUTHPROVIDER                    string `yaml:"CHROMA_AUTH_PROVIDER"`
-	CHROMAAUTHCREDENTIALS                 string `yaml:"CHROMA_AUTH_CREDENTIALS"`
-	ELASTICSEARCHHOST                     string `yaml:"ELASTICSEARCH_HOST"`
-	ELASTICSEARCHPORT                     string `yaml:"ELASTICSEARCH_PORT"`
-	ELASTICSEARCHUSERNAME                 string `yaml:"ELASTICSEARCH_USERNAME"`
-	ELASTICSEARCHPASSWORD                 string `yaml:"ELASTICSEARCH_PASSWORD"`
-	KIBANAPORT                            string `yaml:"KIBANA_PORT"`
-	ANALYTICDBKEYID                       string `yaml:"ANALYTICDB_KEY_ID"`
-	ANALYTICDBKEYSECRET                   string `yaml:"ANALYTICDB_KEY_SECRET"`
-	ANALYTICDBREGIONID                    string `yaml:"ANALYTICDB_REGION_ID"`
-	ANALYTICDBINSTANCEID                  string `yaml:"ANALYTICDB_INSTANCE_ID"`
-	ANALYTICDBACCOUNT                     string `yaml:"ANALYTICDB_ACCOUNT"`
-	ANALYTICDBPASSWORD                    string `yaml:"ANALYTICDB_PASSWORD"`
-	ANALYTICDBNAMESPACE                   string `yaml:"ANALYTICDB_NAMESPACE"`
-	ANALYTICDBNAMESPACEPASSWORD           string `yaml:"ANALYTICDB_NAMESPACE_PASSWORD"`
-	OPENSEARCHHOST                        string `yaml:"OPENSEARCH_HOST"`
-	OPENSEARCHPORT                        string `yaml:"OPENSEARCH_PORT"`
-	OPENSEARCHUSER                        string `yaml:"OPENSEARCH_USER"`
-	OPENSEARCHPASSWORD                    string `yaml:"OPENSEARCH_PASSWORD"`
-	OPENSEARCHSECURE                      string `yaml:"OPENSEARCH_SECURE"`
-	TENCENTVECTORDBURL                    string `yaml:"TENCENT_VECTOR_DB_URL"`
-	TENCENTVECTORDBAPIKEY                 string `yaml:"TENCENT_VECTOR_DB_API_KEY"`
-	TENCENTVECTORDBTIMEOUT                string `yaml:"TENCENT_VECTOR_DB_TIMEOUT"`
-	TENCENTVECTORDBUSERNAME               string `yaml:"TENCENT_VECTOR_DB_USERNAME"`
-	TENCENTVECTORDBDATABASE               string `yaml:"TENCENT_VECTOR_DB_DATABASE"`
-	TENCENTVECTORDBSHARD                  string `yaml:"TENCENT_VECTOR_DB_SHARD"`
-	TENCENTVECTORDBREPLICAS               string `yaml:"TENCENT_VECTOR_DB_REPLICAS"`
-	UPLOADFILESIZELIMIT                   string `yaml:"UPLOAD_FILE_SIZE_LIMIT"`
-	UPLOADFILEBATCHLIMIT                  string `yaml:"UPLOAD_FILE_BATCH_LIMIT"`
-	ETLTYPE                               string `yaml:"ETL_TYPE"`
-	UNSTRUCTUREDAPIURL                    string `yaml:"UNSTRUCTURED_API_URL"`
-	MULTIMODALSENDIMAGEFORMAT             string `yaml:"MULTIMODAL_SEND_IMAGE_FORMAT"`
-	UPLOADIMAGEFILESIZELIMIT              string `yaml:"UPLOAD_IMAGE_FILE_SIZE_LIMIT"`
-	SENTRYDSN                             string `yaml:"SENTRY_DSN"`
-	SENTRYTRACESSAMPLERATE                string `yaml:"SENTRY_TRACES_SAMPLE_RATE"`
-	SENTRYPROFILESSAMPLERATE              string `yaml:"SENTRY_PROFILES_SAMPLE_RATE"`
-	NOTIONINTEGRATIONTYPE                 string `yaml:"NOTION_INTEGRATION_TYPE"`
-	NOTIONCLIENTSECRET                    string `yaml:"NOTION_CLIENT_SECRET"`
-	NOTIONCLIENTID                        string `yaml:"NOTION_CLIENT_ID"`
-	NOTIONINTERNALSECRET                  string `yaml:"NOTION_INTERNAL_SECRET"`
-	MAILTYPE                              string `yaml:"MAIL_TYPE"`
-	MAILDEFAULTSENDFROM                   string `yaml:"MAIL_DEFAULT_SEND_FROM"`
-	SMTPSERVER                            string `yaml:"SMTP_SERVER"`
-	SMTPPORT                              string `yaml:"SMTP_PORT"`
-	SMTPUSERNAME                          string `yaml:"SMTP_USERNAME"`
-	SMTPPASSWORD                          string `yaml:"SMTP_PASSWORD"`
-	SMTPUSETLS                            string `yaml:"SMTP_USE_TLS"`
-	SMTPOPPORTUNISTICTLS                  string `yaml:"SMTP_OPPORTUNISTIC_TLS"`
-	RESENDAPIKEY                          string `yaml:"RESEND_API_KEY"`
-	RESENDAPIURL                          string `yaml:"RESEND_API_URL"`
-	INDEXINGMAXSEGMENTATIONTOKENSLENGTH   string `yaml:"INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH"`
-	INVITEEXPIRYHOURS                     string `yaml:"INVITE_EXPIRY_HOURS"`
-	RESETPASSWORDTOKENEXPIRYHOURS         string `yaml:"RESET_PASSWORD_TOKEN_EXPIRY_HOURS"`
-	CODEEXECUTIONENDPOINT                 string `yaml:"CODE_EXECUTION_ENDPOINT"`
-	CODEEXECUTIONAPIKEY                   string `yaml:"CODE_EXECUTION_API_KEY"`
-	CODEMAXNUMBER                         string `yaml:"CODE_MAX_NUMBER"`
-	CODEMINNUMBER                         string `yaml:"CODE_MIN_NUMBER"`
-	CODEMAXDEPTH                          string `yaml:"CODE_MAX_DEPTH"`
-	CODEMAXPRECISION                      string `yaml:"CODE_MAX_PRECISION"`
-	CODEMAXSTRINGLENGTH                   string `yaml:"CODE_MAX_STRING_LENGTH"`
-	TEMPLATETRANSFORMMAXLENGTH            string `yaml:"TEMPLATE_TRANSFORM_MAX_LENGTH"`
-	CODEMAXSTRINGARRAYLENGTH              string `yaml:"CODE_MAX_STRING_ARRAY_LENGTH"`
-	CODEMAXOBJECTARRAYLENGTH              string `yaml:"CODE_MAX_OBJECT_ARRAY_LENGTH"`
-	CODEMAXNUMBERARRAYLENGTH              string `yaml:"CODE_MAX_NUMBER_ARRAY_LENGTH"`
-	SSRFPROXYHTTPURL                      string `yaml:"SSRF_PROXY_HTTP_URL"`
-	SSRFPROXYHTTPSURL                     string `yaml:"SSRF_PROXY_HTTPS_URL"`
+	LOG_LEVEL   string `yaml:"LOG_LEVEL"`
+	LOG_FILE    string `yaml:"LOG_FILE"`
+	DEBUG       string `yaml:"DEBUG"`
+	FLASK_DEBUG string `yaml:"FLASK_DEBUG"`
+
+	SECRET_KEY    string `yaml:"SECRET_KEY"`
+	INIT_PASSWORD string `yaml:"INIT_PASSWORD"`
+
+	CONSOLE_WEB_URL  string `yaml:"CONSOLE_WEB_URL"`
+	CONSOLE_API_URL  string `yaml:"CONSOLE_API_URL"`
+	SERVICE_API_URL  string `yaml:"SERVICE_API_URL"`
+	APP_WEB_URL      string `yaml:"APP_WEB_URL"`
+	CHECK_UPDATE_URL string `yaml:"CHECK_UPDATE_URL"`
+	OPENAI_API_BASE  string `yaml:"OPENAI_API_BASE"`
+
+	FILES_URL            string `yaml:"FILES_URL"`
+	FILES_ACCESS_TIMEOUT string `yaml:"FILES_ACCESS_TIMEOUT"`
+
+	APP_MAX_ACTIVE_REQUESTS string `yaml:"APP_MAX_ACTIVE_REQUESTS"`
+	MIGRATION_ENABLED       string `yaml:"MIGRATION_ENABLED"`
+
+	DEPLOY_ENV        string `yaml:"DEPLOY_ENV"`
+	DIFY_BIND_ADDRESS string `yaml:"DIFY_BIND_ADDRESS"`
+	DIFY_PORT         string `yaml:"DIFY_PORT"`
+
+	SERVER_WORKER_AMOUNT             string `yaml:"SERVER_WORKER_AMOUNT"`
+	SERVER_WORKER_CLASS              string `yaml:"SERVER_WORKER_CLASS"`
+	CELERY_WORKER_CLASS              string `yaml:"CELERY_WORKER_CLASS"`
+	GUNICORN_TIMEOUT                 string `yaml:"GUNICORN_TIMEOUT"`
+	CELERY_WORKER_AMOUNT             string `yaml:"CELERY_WORKER_AMOUNT"`
+	CELERY_AUTO_SCALE                string `yaml:"CELERY_AUTO_SCALE"`
+	CELERY_MAX_WORKERS               string `yaml:"CELERY_MAX_WORKERS"`
+	CELERY_MIN_WORKERS               string `yaml:"CELERY_MIN_WORKERS"`
+	API_TOOL_DEFAULT_CONNECT_TIMEOUT string `yaml:"API_TOOL_DEFAULT_CONNECT_TIMEOUT"`
+	API_TOOL_DEFAULT_READ_TIMEOUT    string `yaml:"API_TOOL_DEFAULT_READ_TIMEOUT"`
+
+	DB_USERNAME string `yaml:"DB_USERNAME"`
+	DB_PASSWORD string `yaml:"DB_PASSWORD"`
+	DB_HOST     string `yaml:"DB_HOST"`
+	DB_PORT     string `yaml:"DB_PORT"`
+	DB_DATABASE string `yaml:"DB_DATABASE"`
+
+	SQLALCHEMY_POOL_SIZE    string `yaml:"SQLALCHEMY_POOL_SIZE"`
+	SQLALCHEMY_POOL_RECYCLE string `yaml:"SQLALCHEMY_POOL_RECYCLE"`
+	SQLALCHEMY_ECHO         string `yaml:"SQLALCHEMY_ECHO"`
+
+	REDIS_HOST        string `yaml:"REDIS_HOST"`
+	REDIS_PORT        string `yaml:"REDIS_PORT"`
+	REDIS_USERNAME    string `yaml:"REDIS_USERNAME"`
+	REDIS_PASSWORD    string `yaml:"REDIS_PASSWORD"`
+	REDIS_USE_SSL     string `yaml:"REDIS_USE_SSL"`
+	REDIS_DB          int    `yaml:"REDIS_DB"`
+	CELERY_BROKER_URL string `yaml:"CELERY_BROKER_URL"`
+
+	BROKER_USE_SSL             string `yaml:"BROKER_USE_SSL"`
+	WEB_API_CORS_ALLOW_ORIGINS string `yaml:"WEB_API_CORS_ALLOW_ORIGINS"`
+	CONSOLE_CORS_ALLOW_ORIGINS string `yaml:"CONSOLE_CORS_ALLOW_ORIGINS"`
+
+	STORAGE_TYPE string `yaml:"STORAGE_TYPE"`
+
+	STORAGE_LOCAL_PATH string `yaml:"STORAGE_LOCAL_PATH"`
+
+	S3_USE_AWS_MANAGED_IAM string `yaml:"S3_USE_AWS_MANAGED_IAM"`
+	S3_ENDPOINT            string `yaml:"S3_ENDPOINT"`
+	S3_BUCKET_NAME         string `yaml:"S3_BUCKET_NAME"`
+	S3_ACCESS_KEY          string `yaml:"S3_ACCESS_KEY"`
+	S3_SECRET_KEY          string `yaml:"S3_SECRET_KEY"`
+	S3_REGION              string `yaml:"S3_REGION"`
+
+	AZURE_BLOB_ACCOUNT_NAME   string `yaml:"AZURE_BLOB_ACCOUNT_NAME"`
+	AZURE_BLOB_ACCOUNT_KEY    string `yaml:"AZURE_BLOB_ACCOUNT_KEY"`
+	AZURE_BLOB_CONTAINER_NAME string `yaml:"AZURE_BLOB_CONTAINER_NAME"`
+	AZURE_BLOB_ACCOUNT_URL    string `yaml:"AZURE_BLOB_ACCOUNT_URL"`
+
+	GOOGLE_STORAGE_BUCKET_NAME                 string `yaml:"GOOGLE_STORAGE_BUCKET_NAME"`
+	GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64 string `yaml:"GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64"`
+
+	ALIYUN_OSS_BUCKET_NAME  string `yaml:"ALIYUN_OSS_BUCKET_NAME"`
+	ALIYUN_OSS_ACCESS_KEY   string `yaml:"ALIYUN_OSS_ACCESS_KEY"`
+	ALIYUN_OSS_SECRET_KEY   string `yaml:"ALIYUN_OSS_SECRET_KEY"`
+	ALIYUN_OSS_ENDPOINT     string `yaml:"ALIYUN_OSS_ENDPOINT"`
+	ALIYUN_OSS_REGION       string `yaml:"ALIYUN_OSS_REGION"`
+	ALIYUN_OSS_AUTH_VERSION string `yaml:"ALIYUN_OSS_AUTH_VERSION"`
+	ALIYUN_OSS_PATHS        string `yaml:"ALIYUN_OSS_PATHS"`
+
+	TENCENT_COS_BUCKET_NAME string `yaml:"TENCENT_COS_BUCKET_NAME"`
+	TENCENT_COS_SECRET_KEY  string `yaml:"TENCENT_COS_SECRET_KEY"`
+	TENCENT_COS_SECRET_ID   string `yaml:"TENCENT_COS_SECRET_ID"`
+	TENCENT_COS_REGION      string `yaml:"TENCENT_COS_REGION"`
+	TENCENT_COS_SCHEME      string `yaml:"TENCENT_COS_SCHEME"`
+
+	OCI_ENDPOINT    string `yaml:"OCI_ENDPOINT"`
+	OCI_BUCKET_NAME string `yaml:"OCI_BUCKET_NAME"`
+	OCI_ACCESS_KEY  string `yaml:"OCI_ACCESS_KEY"`
+	OCI_SECRET_KEY  string `yaml:"OCI_SECRET_KEY"`
+	OCI_REGION      string `yaml:"OCI_REGION"`
+
+	VECTOR_STORE string `yaml:"VECTOR_STORE"`
+
+	WEAVIATE_ENDPOINT string `yaml:"WEAVIATE_ENDPOINT"`
+	WEAVIATE_API_KEY  string `yaml:"WEAVIATE_API_KEY"`
+
+	QDRANT_URL            string `yaml:"QDRANT_URL"`
+	QDRANT_API_KEY        string `yaml:"QDRANT_API_KEY"`
+	QDRANT_CLIENT_TIMEOUT string `yaml:"QDRANT_CLIENT_TIMEOUT"`
+	QDRANT_GRPC_ENABLED   string `yaml:"QDRANT_GRPC_ENABLED"`
+	QDRANT_GRPC_PORT      string `yaml:"QDRANT_GRPC_PORT"`
+
+	MILVUS_HOST     string `yaml:"MILVUS_HOST"`
+	MILVUS_PORT     string `yaml:"MILVUS_PORT"`
+	MILVUS_USER     string `yaml:"MILVUS_USER"`
+	MILVUS_PASSWORD string `yaml:"MILVUS_PASSWORD"`
+	MILVUS_SECURE   string `yaml:"MILVUS_SECURE"`
+
+	MYSCALE_HOST       string `yaml:"MYSCALE_HOST"`
+	MYSCALE_PORT       string `yaml:"MYSCALE_PORT"`
+	MYSCALE_USER       string `yaml:"MYSCALE_USER"`
+	MYSCALE_PASSWORD   string `yaml:"MYSCALE_PASSWORD"`
+	MYSCALE_DATABASE   string `yaml:"MYSCALE_DATABASE"`
+	MYSCALE_FTS_PARAMS string `yaml:"MYSCALE_FTS_PARAMS"`
+
+	RELYT_HOST     string `yaml:"RELYT_HOST"`
+	RELYT_PORT     string `yaml:"RELYT_PORT"`
+	RELYT_USER     string `yaml:"RELYT_USER"`
+	RELYT_PASSWORD string `yaml:"RELYT_PASSWORD"`
+	RELYT_DATABASE string `yaml:"RELYT_DATABASE"`
+
+	PGVECTOR_HOST     string `yaml:"PGVECTOR_HOST"`
+	PGVECTOR_PORT     string `yaml:"PGVECTOR_PORT"`
+	PGVECTOR_USER     string `yaml:"PGVECTOR_USER"`
+	PGVECTOR_PASSWORD string `yaml:"PGVECTOR_PASSWORD"`
+	PGVECTOR_DATABASE string `yaml:"PGVECTOR_DATABASE"`
+
+	TIDB_VECTOR_HOST     string `yaml:"TIDB_VECTOR_HOST"`
+	TIDB_VECTOR_PORT     string `yaml:"TIDB_VECTOR_PORT"`
+	TIDB_VECTOR_USER     string `yaml:"TIDB_VECTOR_USER"`
+	TIDB_VECTOR_PASSWORD string `yaml:"TIDB_VECTOR_PASSWORD"`
+	TIDB_VECTOR_DATABASE string `yaml:"TIDB_VECTOR_DATABASE"`
+
+	ORACLE_HOST     string `yaml:"ORACLE_HOST"`
+	ORACLE_PORT     string `yaml:"ORACLE_PORT"`
+	ORACLE_USER     string `yaml:"ORACLE_USER"`
+	ORACLE_PASSWORD string `yaml:"ORACLE_PASSWORD"`
+	ORACLE_DATABASE string `yaml:"ORACLE_DATABASE"`
+
+	CHROMA_HOST             string `yaml:"CHROMA_HOST"`
+	CHROMA_PORT             string `yaml:"CHROMA_PORT"`
+	CHROMA_TENANT           string `yaml:"CHROMA_TENANT"`
+	CHROMA_DATABASE         string `yaml:"CHROMA_DATABASE"`
+	CHROMA_AUTH_PROVIDER    string `yaml:"CHROMA_AUTH_PROVIDER"`
+	CHROMA_AUTH_CREDENTIALS string `yaml:"CHROMA_AUTH_CREDENTIALS"`
+
+	ELASTICSEARCH_HOST     string `yaml:"ELASTICSEARCH_HOST"`
+	ELASTICSEARCH_PORT     string `yaml:"ELASTICSEARCH_PORT"`
+	ELASTICSEARCH_USERNAME string `yaml:"ELASTICSEARCH_USERNAME"`
+	ELASTICSEARCH_PASSWORD string `yaml:"ELASTICSEARCH_PASSWORD"`
+	KIBANA_PORT            string `yaml:"KIBANA_PORT"`
+
+	ANALYTICDB_KEY_ID             string `yaml:"ANALYTICDB_KEY_ID"`
+	ANALYTICDB_KEY_SECRET         string `yaml:"ANALYTICDB_KEY_SECRET"`
+	ANALYTICDB_REGION_ID          string `yaml:"ANALYTICDB_REGION_ID"`
+	ANALYTICDB_INSTANCE_ID        string `yaml:"ANALYTICDB_INSTANCE_ID"`
+	ANALYTICDB_ACCOUNT            string `yaml:"ANALYTICDB_ACCOUNT"`
+	ANALYTICDB_PASSWORD           string `yaml:"ANALYTICDB_PASSWORD"`
+	ANALYTICDB_NAMESPACE          string `yaml:"ANALYTICDB_NAMESPACE"`
+	ANALYTICDB_NAMESPACE_PASSWORD string `yaml:"ANALYTICDB_NAMESPACE_PASSWORD"`
+
+	OPENSEARCH_HOST     string `yaml:"OPENSEARCH_HOST"`
+	OPENSEARCH_PORT     string `yaml:"OPENSEARCH_PORT"`
+	OPENSEARCH_USER     string `yaml:"OPENSEARCH_USER"`
+	OPENSEARCH_PASSWORD string `yaml:"OPENSEARCH_PASSWORD"`
+	OPENSEARCH_SECURE   string `yaml:"OPENSEARCH_SECURE"`
+
+	TENCENT_VECTOR_DB_URL      string `yaml:"TENCENT_VECTOR_DB_URL"`
+	TENCENT_VECTOR_DB_API_KEY  string `yaml:"TENCENT_VECTOR_DB_API_KEY"`
+	TENCENT_VECTOR_DB_TIMEOUT  string `yaml:"TENCENT_VECTOR_DB_TIMEOUT"`
+	TENCENT_VECTOR_DB_USERNAME string `yaml:"TENCENT_VECTOR_DB_USERNAME"`
+	TENCENT_VECTOR_DB_DATABASE string `yaml:"TENCENT_VECTOR_DB_DATABASE"`
+	TENCENT_VECTOR_DB_SHARD    string `yaml:"TENCENT_VECTOR_DB_SHARD"`
+	TENCENT_VECTOR_DB_REPLICAS string `yaml:"TENCENT_VECTOR_DB_REPLICAS"`
+
+	UPLOAD_FILE_SIZE_LIMIT  string `yaml:"UPLOAD_FILE_SIZE_LIMIT"`
+	UPLOAD_FILE_BATCH_LIMIT string `yaml:"UPLOAD_FILE_BATCH_LIMIT"`
+
+	ETL_TYPE                     string `yaml:"ETL_TYPE"`
+	UNSTRUCTURED_API_URL         string `yaml:"UNSTRUCTURED_API_URL"`
+	MULTIMODAL_SEND_IMAGE_FORMAT string `yaml:"MULTIMODAL_SEND_IMAGE_FORMAT"`
+	UPLOAD_IMAGE_FILE_SIZE_LIMIT string `yaml:"UPLOAD_IMAGE_FILE_SIZE_LIMIT"`
+
+	SENTRY_DSN                  string `yaml:"SENTRY_DSN"`
+	SENTRY_TRACES_SAMPLE_RATE   string `yaml:"SENTRY_TRACES_SAMPLE_RATE"`
+	SENTRY_PROFILES_SAMPLE_RATE string `yaml:"SENTRY_PROFILES_SAMPLE_RATE"`
+
+	NOTION_INTEGRATION_TYPE string `yaml:"NOTION_INTEGRATION_TYPE"`
+	NOTION_CLIENT_SECRET    string `yaml:"NOTION_CLIENT_SECRET"`
+	NOTION_CLIENT_ID        string `yaml:"NOTION_CLIENT_ID"`
+	NOTION_INTERNAL_SECRET  string `yaml:"NOTION_INTERNAL_SECRET"`
+
+	MAIL_TYPE              string `yaml:"MAIL_TYPE"`
+	MAIL_DEFAULT_SEND_FROM string `yaml:"MAIL_DEFAULT_SEND_FROM"`
+
+	SMTP_SERVER            string `yaml:"SMTP_SERVER"`
+	SMTP_PORT              string `yaml:"SMTP_PORT"`
+	SMTP_USERNAME          string `yaml:"SMTP_USERNAME"`
+	SMTP_PASSWORD          string `yaml:"SMTP_PASSWORD"`
+	SMTP_USE_TLS           string `yaml:"SMTP_USE_TLS"`
+	SMTP_OPPORTUNISTIC_TLS string `yaml:"SMTP_OPPORTUNISTIC_TLS"`
+
+	RESEND_API_KEY                          string `yaml:"RESEND_API_KEY"`
+	RESEND_API_URL                          string `yaml:"RESEND_API_URL"`
+	INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH string `yaml:"INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH"`
+	INVITE_EXPIRY_HOURS                     string `yaml:"INVITE_EXPIRY_HOURS"`
+	RESET_PASSWORD_TOKEN_EXPIRY_HOURS       string `yaml:"RESET_PASSWORD_TOKEN_EXPIRY_HOURS"`
+
+	CODE_EXECUTION_ENDPOINT       string `yaml:"CODE_EXECUTION_ENDPOINT"`
+	CODE_EXECUTION_API_KEY        string `yaml:"CODE_EXECUTION_API_KEY"`
+	CODE_MAX_NUMBER               string `yaml:"CODE_MAX_NUMBER"`
+	CODE_MIN_NUMBER               string `yaml:"CODE_MIN_NUMBER"`
+	CODE_MAX_DEPTH                string `yaml:"CODE_MAX_DEPTH"`
+	CODE_MAX_PRECISION            string `yaml:"CODE_MAX_PRECISION"`
+	CODE_MAX_STRING_LENGTH        string `yaml:"CODE_MAX_STRING_LENGTH"`
+	TEMPLATE_TRANSFORM_MAX_LENGTH string `yaml:"TEMPLATE_TRANSFORM_MAX_LENGTH"`
+	CODE_MAX_STRING_ARRAY_LENGTH  string `yaml:"CODE_MAX_STRING_ARRAY_LENGTH"`
+	CODE_MAX_OBJECT_ARRAY_LENGTH  string `yaml:"CODE_MAX_OBJECT_ARRAY_LENGTH"`
+	CODE_MAX_NUMBER_ARRAY_LENGTH  string `yaml:"CODE_MAX_NUMBER_ARRAY_LENGTH"`
+
+	SSRF_PROXY_HTTP_URL  string `yaml:"SSRF_PROXY_HTTP_URL"`
+	SSRF_PROXY_HTTPS_URL string `yaml:"SSRF_PROXY_HTTPS_URL"`
 }
 
 type HealthCheck struct {
@@ -195,4 +236,235 @@ type HealthCheck struct {
 	Interval string   `yaml:"interval,omitempty"`
 	Timeout  string   `yaml:"timeout,omitempty"`
 	Retries  int      `yaml:"retries,omitempty"`
+}
+
+func CreateXSharedEnv() XSharedEnv {
+	return XSharedEnv{
+		LOG_LEVEL:   "${LOG_LEVEL:-INFO}",
+		LOG_FILE:    "${LOG_FILE:-}",
+		DEBUG:       "${DEBUG:-false}",
+		FLASK_DEBUG: "${FLASK_DEBUG:-false}",
+
+		SECRET_KEY:    "${SECRET_KEY:-sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U}",
+		INIT_PASSWORD: "${INIT_PASSWORD:-}",
+
+		CONSOLE_WEB_URL:      "${CONSOLE_WEB_URL:-}",
+		CONSOLE_API_URL:      "${CONSOLE_API_URL:-}",
+		SERVICE_API_URL:      "${SERVICE_API_URL:-}",
+		APP_WEB_URL:          "${APP_WEB_URL:-}",
+		CHECK_UPDATE_URL:     "${CHECK_UPDATE_URL:-https://updates.dify.ai}",
+		OPENAI_API_BASE:      "${OPENAI_API_BASE:-https://api.openai.com/v1}",
+		FILES_URL:            "${FILES_URL:-}",
+		FILES_ACCESS_TIMEOUT: "${FILES_ACCESS_TIMEOUT:-300}",
+
+		APP_MAX_ACTIVE_REQUESTS: "${APP_MAX_ACTIVE_REQUESTS:-0}",
+		MIGRATION_ENABLED:       "${MIGRATION_ENABLED:-true}",
+		DEPLOY_ENV:              "${DEPLOY_ENV:-PRODUCTION}",
+		DIFY_BIND_ADDRESS:       "${DIFY_BIND_ADDRESS:-0.0.0.0}",
+		DIFY_PORT:               "${DIFY_PORT:-5001}",
+
+		SERVER_WORKER_AMOUNT: "${SERVER_WORKER_AMOUNT:-}",
+		SERVER_WORKER_CLASS:  "${SERVER_WORKER_CLASS:-}",
+		CELERY_WORKER_CLASS:  "${CELERY_WORKER_CLASS:-}",
+		GUNICORN_TIMEOUT:     "${GUNICORN_TIMEOUT:-360}",
+		CELERY_WORKER_AMOUNT: "${CELERY_WORKER_AMOUNT:-}",
+		CELERY_AUTO_SCALE:    "${CELERY_AUTO_SCALE:-false}",
+		CELERY_MAX_WORKERS:   "${CELERY_MAX_WORKERS:-}",
+		CELERY_MIN_WORKERS:   "${CELERY_MIN_WORKERS:-}",
+
+		API_TOOL_DEFAULT_CONNECT_TIMEOUT: "${API_TOOL_DEFAULT_CONNECT_TIMEOUT:-10}",
+		API_TOOL_DEFAULT_READ_TIMEOUT:    "${API_TOOL_DEFAULT_READ_TIMEOUT:-60}",
+
+		DB_USERNAME: "${DB_USERNAME:-postgres}",
+		DB_PASSWORD: "${DB_PASSWORD:-difyai123456}",
+		DB_HOST:     "${DB_HOST:-db}",
+		DB_PORT:     "${DB_PORT:-5432}",
+		DB_DATABASE: "${DB_DATABASE:-dify}",
+
+		SQLALCHEMY_POOL_SIZE:    "${SQLALCHEMY_POOL_SIZE:-30}",
+		SQLALCHEMY_POOL_RECYCLE: "${SQLALCHEMY_POOL_RECYCLE:-3600}",
+		SQLALCHEMY_ECHO:         "${SQLALCHEMY_ECHO:-false}",
+
+		REDIS_HOST:     "${REDIS_HOST:-redis}",
+		REDIS_PORT:     "${REDIS_PORT:-6379}",
+		REDIS_USERNAME: "${REDIS_USERNAME:-}",
+		REDIS_PASSWORD: "${REDIS_PASSWORD:-difyai123456}",
+		REDIS_USE_SSL:  "${REDIS_USE_SSL:-false}",
+		REDIS_DB:       0,
+
+		CELERY_BROKER_URL:          "${CELERY_BROKER_URL:-redis://:difyai123456@redis:6379/1}",
+		BROKER_USE_SSL:             "${BROKER_USE_SSL:-false}",
+		WEB_API_CORS_ALLOW_ORIGINS: "${WEB_API_CORS_ALLOW_ORIGINS:-*}",
+		CONSOLE_CORS_ALLOW_ORIGINS: "${CONSOLE_CORS_ALLOW_ORIGINS:-*}",
+
+		STORAGE_TYPE: "${STORAGE_TYPE:-local}",
+
+		STORAGE_LOCAL_PATH: "storage",
+
+		S3_USE_AWS_MANAGED_IAM: "${S3_USE_AWS_MANAGED_IAM:-false}",
+		S3_ENDPOINT:            "${S3_ENDPOINT:-}",
+		S3_BUCKET_NAME:         "${S3_BUCKET_NAME:-}",
+		S3_ACCESS_KEY:          "${S3_ACCESS_KEY:-}",
+		S3_SECRET_KEY:          "${S3_SECRET_KEY:-}",
+		S3_REGION:              "${S3_REGION:-us-east-1}",
+
+		AZURE_BLOB_ACCOUNT_NAME:   "${AZURE_BLOB_ACCOUNT_NAME:-}",
+		AZURE_BLOB_ACCOUNT_KEY:    "${AZURE_BLOB_ACCOUNT_KEY:-}",
+		AZURE_BLOB_CONTAINER_NAME: "${AZURE_BLOB_CONTAINER_NAME:-}",
+		AZURE_BLOB_ACCOUNT_URL:    "${AZURE_BLOB_ACCOUNT_URL:-}",
+
+		GOOGLE_STORAGE_BUCKET_NAME:                 "${GOOGLE_STORAGE_BUCKET_NAME:-}",
+		GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64: "${GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64:-}",
+
+		ALIYUN_OSS_BUCKET_NAME:  "${ALIYUN_OSS_BUCKET_NAME:-}",
+		ALIYUN_OSS_ACCESS_KEY:   "${ALIYUN_OSS_ACCESS_KEY:-}",
+		ALIYUN_OSS_SECRET_KEY:   "${ALIYUN_OSS_SECRET_KEY:-}",
+		ALIYUN_OSS_ENDPOINT:     "${ALIYUN_OSS_ENDPOINT:-}",
+		ALIYUN_OSS_REGION:       "${ALIYUN_OSS_REGION:-}",
+		ALIYUN_OSS_AUTH_VERSION: "${ALIYUN_OSS_AUTH_VERSION:-v4}",
+		ALIYUN_OSS_PATHS:        "${ALIYUN_OSS_PATH:-}",
+
+		TENCENT_COS_BUCKET_NAME: "${TENCENT_COS_BUCKET_NAME:-}",
+		TENCENT_COS_SECRET_KEY:  "${TENCENT_COS_SECRET_KEY:-}",
+		TENCENT_COS_SECRET_ID:   "${TENCENT_COS_SECRET_ID:-}",
+		TENCENT_COS_REGION:      "${TENCENT_COS_REGION:-}",
+		TENCENT_COS_SCHEME:      "${TENCENT_COS_SCHEME:-}",
+
+		OCI_ENDPOINT:    "${OCI_ENDPOINT:-}",
+		OCI_BUCKET_NAME: "${OCI_BUCKET_NAME:-}",
+		OCI_ACCESS_KEY:  "${OCI_ACCESS_KEY:-}",
+		OCI_SECRET_KEY:  "${OCI_SECRET_KEY:-}",
+		OCI_REGION:      "${OCI_REGION:-}",
+
+		VECTOR_STORE: "${VECTOR_STORE:-weaviate}",
+
+		WEAVIATE_ENDPOINT: "${WEAVIATE_ENDPOINT:-http://weaviate:8080}",
+		WEAVIATE_API_KEY:  "${WEAVIATE_API_KEY:-WVF5YThaHlkYwhGUSmCRgsX3tD5ngdN8pkih}",
+
+		QDRANT_URL:            "${QDRANT_URL:-http://qdrant:6333}",
+		QDRANT_API_KEY:        "${QDRANT_API_KEY:-difyai123456}",
+		QDRANT_CLIENT_TIMEOUT: "${QDRANT_CLIENT_TIMEOUT:-20}",
+		QDRANT_GRPC_ENABLED:   "${QDRANT_GRPC_ENABLED:-false}",
+		QDRANT_GRPC_PORT:      "${QDRANT_GRPC_PORT:-6334}",
+
+		MILVUS_HOST:     "${MILVUS_HOST:-127.0.0.1}",
+		MILVUS_PORT:     "${MILVUS_PORT:-19530}",
+		MILVUS_USER:     "${MILVUS_USER:-root}",
+		MILVUS_PASSWORD: "${MILVUS_PASSWORD:-Milvus}",
+		MILVUS_SECURE:   "${MILVUS_SECURE:-false}",
+
+		MYSCALE_HOST:       "${MYSCALE_HOST:-myscale}",
+		MYSCALE_PORT:       "${MYSCALE_PORT:-8123}",
+		MYSCALE_USER:       "${MYSCALE_USER:-default}",
+		MYSCALE_PASSWORD:   "${MYSCALE_PASSWORD:-}",
+		MYSCALE_DATABASE:   "${MYSCALE_DATABASE:-dify}",
+		MYSCALE_FTS_PARAMS: "${MYSCALE_FTS_PARAMS:-}",
+
+		RELYT_HOST:     "${RELYT_HOST:-db}",
+		RELYT_PORT:     "${RELYT_PORT:-5432}",
+		RELYT_USER:     "${RELYT_USER:-postgres}",
+		RELYT_PASSWORD: "${RELYT_PASSWORD:-difyai123456}",
+		RELYT_DATABASE: "${RELYT_DATABASE:-postgres}",
+
+		PGVECTOR_HOST:     "${PGVECTOR_HOST:-pgvector}",
+		PGVECTOR_PORT:     "${PGVECTOR_PORT:-5432}",
+		PGVECTOR_USER:     "${PGVECTOR_USER:-postgres}",
+		PGVECTOR_PASSWORD: "${PGVECTOR_PASSWORD:-difyai123456}",
+		PGVECTOR_DATABASE: "${PGVECTOR_DATABASE:-dify}",
+
+		TIDB_VECTOR_HOST:     "${TIDB_VECTOR_HOST:-tidb}",
+		TIDB_VECTOR_PORT:     "${TIDB_VECTOR_PORT:-4000}",
+		TIDB_VECTOR_USER:     "${TIDB_VECTOR_USER:-}",
+		TIDB_VECTOR_PASSWORD: "${TIDB_VECTOR_PASSWORD:-}",
+		TIDB_VECTOR_DATABASE: "${TIDB_VECTOR_DATABASE:-dify}",
+
+		ORACLE_HOST:     "${ORACLE_HOST:-oracle}",
+		ORACLE_PORT:     "${ORACLE_PORT:-1521}",
+		ORACLE_USER:     "${ORACLE_USER:-dify}",
+		ORACLE_PASSWORD: "${ORACLE_PASSWORD:-dify}",
+		ORACLE_DATABASE: "${ORACLE_DATABASE:-FREEPDB1}",
+
+		CHROMA_HOST:             "${CHROMA_HOST:-127.0.0.1}",
+		CHROMA_PORT:             "${CHROMA_PORT:-8000}",
+		CHROMA_TENANT:           "${CHROMA_TENANT:-default_tenant}",
+		CHROMA_DATABASE:         "${CHROMA_DATABASE:-default_database}",
+		CHROMA_AUTH_PROVIDER:    "${CHROMA_AUTH_PROVIDER:-chromadb.auth.token_authn.TokenAuthClientProvider}",
+		CHROMA_AUTH_CREDENTIALS: "${CHROMA_AUTH_CREDENTIALS:-}",
+
+		ELASTICSEARCH_HOST:     "${ELASTICSEARCH_HOST:-0.0.0.0}",
+		ELASTICSEARCH_PORT:     "${ELASTICSEARCH_PORT:-9200}",
+		ELASTICSEARCH_USERNAME: "${ELASTICSEARCH_USERNAME:-elastic}",
+		ELASTICSEARCH_PASSWORD: "${ELASTICSEARCH_PASSWORD:-elastic}",
+		KIBANA_PORT:            "${KIBANA_PORT:-5601}",
+
+		ANALYTICDB_KEY_ID:             "${ANALYTICDB_KEY_ID:-}",
+		ANALYTICDB_KEY_SECRET:         "${ANALYTICDB_KEY_SECRET:-}",
+		ANALYTICDB_REGION_ID:          "${ANALYTICDB_REGION_ID:-}",
+		ANALYTICDB_INSTANCE_ID:        "${ANALYTICDB_INSTANCE_ID:-}",
+		ANALYTICDB_ACCOUNT:            "${ANALYTICDB_ACCOUNT:-}",
+		ANALYTICDB_PASSWORD:           "${ANALYTICDB_PASSWORD:-}",
+		ANALYTICDB_NAMESPACE:          "${ANALYTICDB_NAMESPACE:-dify}",
+		ANALYTICDB_NAMESPACE_PASSWORD: "${ANALYTICDB_NAMESPACE_PASSWORD:-}",
+
+		OPENSEARCH_HOST:     "${OPENSEARCH_HOST:-opensearch}",
+		OPENSEARCH_PORT:     "${OPENSEARCH_PORT:-9200}",
+		OPENSEARCH_USER:     "${OPENSEARCH_USER:-admin}",
+		OPENSEARCH_PASSWORD: "${OPENSEARCH_PASSWORD:-admin}",
+		OPENSEARCH_SECURE:   "${OPENSEARCH_SECURE:-true}",
+
+		TENCENT_VECTOR_DB_URL:      "${TENCENT_VECTOR_DB_URL:-http://127.0.0.1}",
+		TENCENT_VECTOR_DB_API_KEY:  "${TENCENT_VECTOR_DB_API_KEY:-dify}",
+		TENCENT_VECTOR_DB_TIMEOUT:  "${TENCENT_VECTOR_DB_TIMEOUT:-30}",
+		TENCENT_VECTOR_DB_USERNAME: "${TENCENT_VECTOR_DB_USERNAME:-dify}",
+		TENCENT_VECTOR_DB_DATABASE: "${TENCENT_VECTOR_DB_DATABASE:-dify}",
+		TENCENT_VECTOR_DB_SHARD:    "${TENCENT_VECTOR_DB_SHARD:-1}",
+		TENCENT_VECTOR_DB_REPLICAS: "${TENCENT_VECTOR_DB_REPLICAS:-2}",
+
+		UPLOAD_FILE_SIZE_LIMIT:  "${UPLOAD_FILE_SIZE_LIMIT:-15}",
+		UPLOAD_FILE_BATCH_LIMIT: "${UPLOAD_FILE_BATCH_LIMIT:-5}",
+
+		ETL_TYPE:                     "${ETL_TYPE:-dify}",
+		UNSTRUCTURED_API_URL:         "${UNSTRUCTURED_API_URL:-}",
+		MULTIMODAL_SEND_IMAGE_FORMAT: "${MULTIMODAL_SEND_IMAGE_FORMAT:-base64}",
+		UPLOAD_IMAGE_FILE_SIZE_LIMIT: "${UPLOAD_IMAGE_FILE_SIZE_LIMIT:-10}",
+
+		SENTRY_DSN:                  "${API_SENTRY_DSN:-}",
+		SENTRY_TRACES_SAMPLE_RATE:   "${API_SENTRY_TRACES_SAMPLE_RATE:-1.0}",
+		SENTRY_PROFILES_SAMPLE_RATE: "${API_SENTRY_PROFILES_SAMPLE_RATE:-1.0}",
+
+		NOTION_INTEGRATION_TYPE: "${NOTION_INTEGRATION_TYPE:-public}",
+		NOTION_CLIENT_SECRET:    "${NOTION_CLIENT_SECRET:-}",
+		NOTION_CLIENT_ID:        "${NOTION_CLIENT_ID:-}",
+		NOTION_INTERNAL_SECRET:  "${NOTION_INTERNAL_SECRET:-}",
+
+		MAIL_TYPE:              "${MAIL_TYPE:-resend}",
+		MAIL_DEFAULT_SEND_FROM: "${MAIL_DEFAULT_SEND_FROM:-}",
+		SMTP_SERVER:            "${SMTP_SERVER:-}",
+		SMTP_PORT:              "${SMTP_PORT:-465}",
+		SMTP_USERNAME:          "${SMTP_USERNAME:-}",
+		SMTP_PASSWORD:          "${SMTP_PASSWORD:-}",
+		SMTP_USE_TLS:           "${SMTP_USE_TLS:-true}",
+		SMTP_OPPORTUNISTIC_TLS: "${SMTP_OPPORTUNISTIC_TLS:-false}",
+
+		RESEND_API_KEY:                          "${RESEND_API_KEY:-your-resend-api-key}",
+		RESEND_API_URL:                          "https://api.resend.com",
+		INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH: "${INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH:-1000}",
+		INVITE_EXPIRY_HOURS:                     "${INVITE_EXPIRY_HOURS:-72}",
+		RESET_PASSWORD_TOKEN_EXPIRY_HOURS:       "${RESET_PASSWORD_TOKEN_EXPIRY_HOURS:-24}",
+
+		CODE_EXECUTION_ENDPOINT:       "${CODE_EXECUTION_ENDPOINT:-http://sandbox:8194}",
+		CODE_EXECUTION_API_KEY:        "${SANDBOX_API_KEY:-dify-sandbox}",
+		CODE_MAX_NUMBER:               "${CODE_MAX_NUMBER:-9223372036854775807}",
+		CODE_MIN_NUMBER:               "${CODE_MIN_NUMBER:--9223372036854775808}",
+		CODE_MAX_DEPTH:                "${CODE_MAX_DEPTH:-5}",
+		CODE_MAX_PRECISION:            "${CODE_MAX_PRECISION:-20}",
+		CODE_MAX_STRING_LENGTH:        "${CODE_MAX_STRING_LENGTH:-80000}",
+		TEMPLATE_TRANSFORM_MAX_LENGTH: "${TEMPLATE_TRANSFORM_MAX_LENGTH:-80000}",
+		CODE_MAX_STRING_ARRAY_LENGTH:  "${CODE_MAX_STRING_ARRAY_LENGTH:-30}",
+		CODE_MAX_OBJECT_ARRAY_LENGTH:  "${CODE_MAX_OBJECT_ARRAY_LENGTH:-30}",
+		CODE_MAX_NUMBER_ARRAY_LENGTH:  "${CODE_MAX_NUMBER_ARRAY_LENGTH:-1000}",
+
+		SSRF_PROXY_HTTP_URL:  "${SSRF_PROXY_HTTP_URL:-http://ssrf_proxy:3128}",
+		SSRF_PROXY_HTTPS_URL: "${SSRF_PROXY_HTTPS_URL:-http://ssrf_proxy:3128}",
+	}
 }

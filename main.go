@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/soulteary/dify-easy/deploy"
 	"github.com/soulteary/dify-easy/fn"
@@ -22,5 +23,7 @@ func main() {
 
 	// Print the YAML
 	fmt.Printf("--- YAML ---\n%s\n", output)
+
+	os.WriteFile("docker-compose.test.yaml", []byte(output), 0644)
 
 }

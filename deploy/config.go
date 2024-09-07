@@ -54,6 +54,8 @@ type DifyDeploy struct {
 func CreateConfig() DifyDeploy {
 	config := DifyDeploy{}
 
+	config.XSharedEnv = DifyCore.CreateXSharedEnv()
+
 	config.Services.API = DifyCore.CreateDifyAPI()
 	config.Services.Worker = DifyCore.CreateDifyWorker()
 	config.Services.Web = DifyCore.CreateDifyWeb()
