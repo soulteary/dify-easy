@@ -1,6 +1,7 @@
 package Fn
 
 import (
+	"bytes"
 	"encoding/json"
 	"regexp"
 	"strings"
@@ -14,18 +15,28 @@ func FixYAML(raw string) string {
 
 	// fix muti-line command
 	output = strings.ReplaceAll(output, "command: |-\n      >", "command: >")
+	// fix entrypoint command
+	output = regexp.MustCompile(`(?m)(entrypoint:\s)\|\n\s+(\[.*\])`).ReplaceAllString(output, "$1$2")
+	// fix command
+	output = regexp.MustCompile(`(?m)(command:\s)\|\n\s+(\[.*\])`).ReplaceAllString(output, "$1$2")
 	// fix healthcheck command
-	var re = regexp.MustCompile(`(?m)(test:\s)\'(\[.*?\])'`)
-	output = re.ReplaceAllString(output, "$1$2")
+	output = regexp.MustCompile(`(?m)(test:\s)\|\n\s+(\[.*\])`).ReplaceAllString(output, "$1$2")
+	// fix ports
+	output = regexp.MustCompile(`(?m)(-\s)'"(.*)"'$`).ReplaceAllString(output, "$1\"$2\"")
 
 	output = strings.ReplaceAll(output, `: keep-empty`, ":")
 	return output
 }
 
-func GetHealthCheckCMD(arr []string) (string, error) {
-	jsonData, err := json.Marshal(arr)
+func ConvertArrToCommand(arr []string) (string, error) {
+	var buf bytes.Buffer
+	encoder := json.NewEncoder(&buf)
+	encoder.SetEscapeHTML(false)
+
+	err := encoder.Encode(arr)
 	if err != nil {
 		return "", err
 	}
-	return string(jsonData), nil
+
+	return buf.String(), nil
 }

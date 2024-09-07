@@ -1,10 +1,14 @@
 package DifyCore
 
+import (
+	"github.com/soulteary/dify-easy/fn"
+)
+
 type SsrfProxy struct {
 	Image       string               `yaml:"image"`
 	Restart     string               `yaml:"restart"`
 	Volumes     []string             `yaml:"volumes"`
-	Entrypoint  []string             `yaml:"entrypoint"`
+	Entrypoint  string               `yaml:"entrypoint"`
 	Environment SsrfProxyEnvironment `yaml:"environment"`
 	Networks    []string             `yaml:"networks"`
 }
@@ -18,17 +22,13 @@ type SsrfProxyEnvironment struct {
 }
 
 func CreateDifySsrfProxy() SsrfProxy {
-	return SsrfProxy{
+
+	config := SsrfProxy{
 		Image:   "ubuntu/squid:latest",
 		Restart: "always",
 		Volumes: []string{
 			"./ssrf_proxy/squid.conf.template:/etc/squid/squid.conf.template",
 			"./ssrf_proxy/docker-entrypoint.sh:/docker-entrypoint-mount.sh",
-		},
-		Entrypoint: []string{
-			"sh",
-			"-c",
-			"cp /docker-entrypoint-mount.sh /docker-entrypoint.sh && sed -i 's/\\r$$//' /docker-entrypoint.sh && chmod +x /docker-entrypoint.sh && /docker-entrypoint.sh",
 		},
 		Environment: SsrfProxyEnvironment{
 			HTTPPORT:         "${SSRF_HTTP_PORT:-3128}",
@@ -42,4 +42,16 @@ func CreateDifySsrfProxy() SsrfProxy {
 			"default",
 		},
 	}
+
+	entrypointCommand, err := Fn.ConvertArrToCommand([]string{
+		"sh",
+		"-c",
+		"cp /docker-entrypoint-mount.sh /docker-entrypoint.sh && sed -i 's/\\r$$//' /docker-entrypoint.sh && chmod +x /docker-entrypoint.sh && /docker-entrypoint.sh",
+	})
+
+	if err == nil {
+		config.Entrypoint = entrypointCommand
+	}
+
+	return config
 }

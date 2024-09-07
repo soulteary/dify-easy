@@ -31,5 +31,11 @@ func CreateDifySandbox() Sandbox {
 			HTTPSPROXY:    "${SANDBOX_HTTPS_PROXY:-http://ssrf_proxy:3128}",
 			SANDBOXPORT:   "${SANDBOX_PORT:-8194}",
 		},
+		Volumes: []string{
+			"./volumes/sandbox/dependencies:/dependencies",
+		},
+		Networks: []string{
+			"ssrf_proxy_network",
+		},
 	}
 }

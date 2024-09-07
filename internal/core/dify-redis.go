@@ -22,7 +22,7 @@ func CreateDifyRedis() Redis {
 		Command: "redis-server --requirepass ${REDIS_PASSWORD:-difyai123456}",
 	}
 
-	healthCheckCmd, err := Fn.GetHealthCheckCMD([]string{"CMD", "redis-cli", "ping"})
+	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "redis-cli", "ping"})
 	if err == nil {
 		config.Healthcheck = HealthCheck{
 			Test: healthCheckCmd,

@@ -64,6 +64,7 @@ func CreateConfig() DifyDeploy {
 	config.Services.Sandbox = DifyCore.CreateDifySandbox()
 	config.Services.Certbot = DifyCore.CreateDifyCertbot()
 	config.Services.Nginx = DifyCore.CreateDifyNginx()
+	config.Services.SsrfProxy = DifyCore.CreateDifySsrfProxy()
 
 	config.Networks = DifyNetwork.CreateNetworks()
 	config.Volumes = DifyVolume.CreateVolumes()

@@ -1,16 +1,20 @@
 package DifyCore
 
+import (
+	"github.com/soulteary/dify-easy/fn"
+)
+
 type Certbot struct {
 	Image       string   `yaml:"image"`
 	Profiles    []string `yaml:"profiles"`
 	Volumes     []string `yaml:"volumes"`
 	Environment []string `yaml:"environment"`
-	Entrypoint  []string `yaml:"entrypoint"`
-	Command     []string `yaml:"command"`
+	Entrypoint  string   `yaml:"entrypoint"`
+	Command     string   `yaml:"command"`
 }
 
 func CreateDifyCertbot() Certbot {
-	return Certbot{
+	config := Certbot{
 		Image:    "certbot/certbot",
 		Profiles: []string{"certbot"},
 		Volumes: []string{
@@ -26,13 +30,25 @@ func CreateDifyCertbot() Certbot {
 			"CERTBOT_DOMAIN=${CERTBOT_DOMAIN}",
 			"CERTBOT_OPTIONS=${CERTBOT_OPTIONS:-}",
 		},
-		Entrypoint: []string{
-			"/docker-entrypoint.sh",
-		},
-		Command: []string{
-			"tail",
-			"-f",
-			"/dev/null",
-		},
 	}
+
+	entrypointCommand, err := Fn.ConvertArrToCommand([]string{
+		"/docker-entrypoint.sh",
+	})
+
+	if err == nil {
+		config.Entrypoint = entrypointCommand
+	}
+
+	command, err := Fn.ConvertArrToCommand([]string{
+		"tail",
+		"-f",
+		"/dev/null",
+	})
+
+	if err == nil {
+		config.Command = command
+	}
+
+	return config
 }

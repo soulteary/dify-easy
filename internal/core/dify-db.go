@@ -45,7 +45,7 @@ func CreateDifyDB() DB {
 		},
 	}
 
-	healthCheckCmd, err := Fn.GetHealthCheckCMD([]string{"CMD", "pg_isready"})
+	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "pg_isready"})
 	if err == nil {
 		config.Healthcheck = HealthCheck{
 			Test:     healthCheckCmd,

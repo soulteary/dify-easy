@@ -1,10 +1,14 @@
 package DifyCore
 
+import (
+	"github.com/soulteary/dify-easy/fn"
+)
+
 type Nginx struct {
 	Image       string           `yaml:"image"`
 	Restart     string           `yaml:"restart"`
 	Volumes     []string         `yaml:"volumes"`
-	Entrypoint  []string         `yaml:"entrypoint"`
+	Entrypoint  string           `yaml:"entrypoint"`
 	Environment NginxEnvironment `yaml:"environment"`
 	DependsOn   []string         `yaml:"depends_on"`
 	Ports       []string         `yaml:"ports"`
@@ -28,7 +32,7 @@ type NginxEnvironment struct {
 }
 
 func CreateDifyNginx() Nginx {
-	return Nginx{
+	config := Nginx{
 		Image:   "nginx:latest",
 		Restart: "always",
 		Volumes: []string{
@@ -41,11 +45,6 @@ func CreateDifyNginx() Nginx {
 			"./volumes/certbot/conf/live:/etc/letsencrypt/live",
 			"./volumes/certbot/conf:/etc/letsencrypt",
 			"./volumes/certbot/www:/var/www/html",
-		},
-		Entrypoint: []string{
-			"sh",
-			"-c",
-			"cp /docker-entrypoint-mount.sh /docker-entrypoint.sh && sed -i 's/\\r$$//' /docker-entrypoint.sh && chmod +x /docker-entrypoint.sh && /docker-entrypoint.sh",
 		},
 		Environment: NginxEnvironment{
 			NGINXSERVERNAME:             "${NGINX_SERVER_NAME:-_}",
@@ -68,8 +67,19 @@ func CreateDifyNginx() Nginx {
 			"web",
 		},
 		Ports: []string{
-			"${EXPOSE_NGINX_PORT:-80}:${NGINX_PORT:-80}",
-			"${EXPOSE_NGINX_SSL_PORT:-443}:${NGINX_SSL_PORT:-443}",
+			`"${EXPOSE_NGINX_PORT:-80}:${NGINX_PORT:-80}"`,
+			`"${EXPOSE_NGINX_SSL_PORT:-443}:${NGINX_SSL_PORT:-443}"`,
 		},
 	}
+
+	entrypointCommand, err := Fn.ConvertArrToCommand([]string{
+		"sh",
+		"-c",
+		"cp /docker-entrypoint-mount.sh /docker-entrypoint.sh && sed -i 's/\\r$$//' /docker-entrypoint.sh && chmod +x /docker-entrypoint.sh && /docker-entrypoint.sh",
+	})
+	if err == nil {
+		config.Entrypoint = entrypointCommand
+	}
+
+	return config
 }
