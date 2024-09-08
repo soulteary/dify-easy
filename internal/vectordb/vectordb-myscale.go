@@ -9,3 +9,21 @@ type Myscale struct {
 	Volumes       []string `yaml:"volumes"`
 	Ports         []string `yaml:"ports"`
 }
+
+func CreateMyscale() Myscale {
+	return Myscale{
+		ContainerName: "myscale",
+		Image:         "myscale/myscaledb:1.6.4",
+		Profiles:      []string{"myscale"},
+		Restart:       "always",
+		Tty:           true,
+		Volumes: []string{
+			"./volumes/myscale/data:/var/lib/clickhouse",
+			"./volumes/myscale/log:/var/log/clickhouse-server",
+			"./volumes/myscale/config/users.d/custom_users_config.xml:/etc/clickhouse-server/users.d/custom_users_config.xml",
+		},
+		Ports: []string{
+			"${MYSCALE_PORT:-8123}:${MYSCALE_PORT:-8123}",
+		},
+	}
+}

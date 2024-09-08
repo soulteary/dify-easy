@@ -11,16 +11,15 @@ type DifyDeploy struct {
 	DifyCore.XSharedEnv `yaml:"x-shared-env,omitempty"`
 
 	Services struct {
-		DifyCore.API          `yaml:"api"`
-		DifyCore.Worker       `yaml:"worker"`
-		DifyCore.Web          `yaml:"web"`
-		DifyCore.DB           `yaml:"db"`
-		DifyCore.Redis        `yaml:"redis"`
-		DifyCore.Sandbox      `yaml:"sandbox"`
-		DifyCore.SsrfProxy    `yaml:"ssrf_proxy"`
-		DifyCore.Certbot      `yaml:"certbot"`
-		DifyCore.Nginx        `yaml:"nginx"`
-		DifyCore.Unstructured `yaml:"unstructured,omitempty"`
+		DifyCore.API       `yaml:"api"`
+		DifyCore.Worker    `yaml:"worker"`
+		DifyCore.Web       `yaml:"web"`
+		DifyCore.DB        `yaml:"db"`
+		DifyCore.Redis     `yaml:"redis"`
+		DifyCore.Sandbox   `yaml:"sandbox"`
+		DifyCore.SsrfProxy `yaml:"ssrf_proxy"`
+		DifyCore.Certbot   `yaml:"certbot"`
+		DifyCore.Nginx     `yaml:"nginx"`
 
 		VectorDB.Weaviate `yaml:"weaviate,omitempty"`
 
@@ -34,6 +33,10 @@ type DifyDeploy struct {
 
 		VectorDB.Oracle `yaml:"oracle,omitempty"`
 
+		VectorDB.MilvusEtcd       `yaml:"etcd,omitempty"`
+		VectorDB.MilvusMinio      `yaml:"minio,omitempty"`
+		VectorDB.MilvusStandalone `yaml:"milvus-standalone,omitempty"`
+
 		VectorDB.Opensearch           `yaml:"opensearch,omitempty"`
 		VectorDB.OpensearchDashboards `yaml:"opensearch-dashboards,omitempty"`
 
@@ -42,9 +45,7 @@ type DifyDeploy struct {
 		VectorDB.Elasticsearch `yaml:"elasticsearch,omitempty"`
 		VectorDB.Kibana        `yaml:"kibana,omitempty"`
 
-		VectorDB.Etcd             `yaml:"etcd,omitempty"`
-		VectorDB.Minio            `yaml:"minio,omitempty"`
-		VectorDB.MilvusStandalone `yaml:"milvus-standalone,omitempty"`
+		DifyCore.Unstructured `yaml:"unstructured,omitempty"`
 	} `yaml:"services"`
 
 	DifyNetwork.Networks `yaml:"networks"`
@@ -73,6 +74,20 @@ func CreateConfig() DifyDeploy {
 	config.Services.PgvectoRs = VectorDB.CreatePgvectorRs()
 	config.Services.Chroma = VectorDB.CreateChroma()
 	config.Services.Oracle = VectorDB.CreateOracle()
+
+	config.Services.MilvusEtcd = VectorDB.CreateMilvusEtcd()
+	config.Services.MilvusMinio = VectorDB.CreateMilvusMinio()
+	config.Services.MilvusStandalone = VectorDB.CreateMilvusStandalone()
+
+	config.Services.Opensearch = VectorDB.CreateOpensearch()
+	config.Services.OpensearchDashboards = VectorDB.CreateOpenSearchDashboards()
+
+	config.Services.Myscale = VectorDB.CreateMyscale()
+
+	config.Services.Elasticsearch = VectorDB.CreateElasticsearch()
+	config.Services.Kibana = VectorDB.CreateKibana()
+
+	config.Services.Unstructured = DifyCore.CreateUnstructured()
 
 	config.Networks = DifyNetwork.CreateNetworks()
 	config.Volumes = DifyVolume.CreateVolumes()
