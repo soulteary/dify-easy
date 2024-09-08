@@ -21,6 +21,13 @@ func FixYAML(raw string) string {
 	output = regexp.MustCompile(`(?m)(command:\s)\|\n\s+(\[.*\])`).ReplaceAllString(output, "$1$2")
 	// fix healthcheck command
 	output = regexp.MustCompile(`(?m)(test:\s)\|\n\s+(\[.*\])`).ReplaceAllString(output, "$1$2")
+
+	for _, match := range regexp.MustCompile(`(?m)^\s+test:\s\[(.+)\]$`).FindAllStringSubmatch(output, -1) {
+		sub := regexp.MustCompile(`(?m),`).ReplaceAllString(match[0], ", ")
+		sub = regexp.MustCompile(`(?m)\[(.*)\]`).ReplaceAllString(sub, "[ $1 ]")
+		output = strings.ReplaceAll(output, match[0], sub)
+	}
+
 	// fix ports
 	output = regexp.MustCompile(`(?m)(-\s)'"(.*)"'$`).ReplaceAllString(output, "$1\"$2\"")
 

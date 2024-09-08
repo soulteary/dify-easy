@@ -31,5 +31,4 @@ func main() {
 	fmt.Printf("--- YAML ---\n%s\n", output)
 
 	os.WriteFile("./docker-compose.yml", []byte(output), 0644)
-
 }
