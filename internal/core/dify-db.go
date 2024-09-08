@@ -18,10 +18,10 @@ type DB struct {
 }
 
 type DBEnvironment struct {
-	PGUSER           string `yaml:"PGUSER"`
-	POSTGRESPASSWORD string `yaml:"POSTGRES_PASSWORD"`
-	POSTGRESDB       string `yaml:"POSTGRES_DB"`
-	PGDATA           string `yaml:"PGDATA"`
+	PGUSER            string `yaml:"PGUSER"`
+	POSTGRES_PASSWORD string `yaml:"POSTGRES_PASSWORD"`
+	POSTGRES_DB       string `yaml:"POSTGRES_DB"`
+	PGDATA            string `yaml:"PGDATA"`
 }
 
 func CreateDifyDB() DB {
@@ -29,10 +29,10 @@ func CreateDifyDB() DB {
 		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_POSTGRES),
 		Restart: "always",
 		Environment: DBEnvironment{
-			PGUSER:           "${PGUSER:-postgres}",
-			POSTGRESPASSWORD: "${POSTGRES_PASSWORD:-difyai123456}",
-			POSTGRESDB:       "${POSTGRES_DB:-dify}",
-			PGDATA:           "${PGDATA:-/var/lib/postgresql/data/pgdata}",
+			PGUSER:            "${PGUSER:-postgres}",
+			POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-difyai123456}",
+			POSTGRES_DB:       "${POSTGRES_DB:-dify}",
+			PGDATA:            "${PGDATA:-/var/lib/postgresql/data/pgdata}",
 		},
 		Command: strings.Join([]string{
 			">",

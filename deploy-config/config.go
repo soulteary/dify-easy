@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
 	DifyCore "github.com/soulteary/dify-easy/internal/core"
 	DifyNetwork "github.com/soulteary/dify-easy/internal/network"
 	VectorDB "github.com/soulteary/dify-easy/internal/vectordb"
@@ -14,7 +15,7 @@ import (
 func Create() DifyDeploy {
 	config := DifyDeploy{}
 
-	config.XSharedEnv = DifyCore.CreateXSharedEnv()
+	config.XSharedEnv = CustomConfig.GetXSharedEnv()
 
 	config.Services.API = DifyCore.CreateDifyAPI()
 	config.Services.Worker = DifyCore.CreateDifyWorker()

@@ -12,10 +12,10 @@ type Web struct {
 }
 
 type WebEnvirontment struct {
-	CONSOLEAPIURL         string `yaml:"CONSOLE_API_URL"`
-	APPAPIURL             string `yaml:"APP_API_URL"`
-	SENTRYDSN             string `yaml:"SENTRY_DSN"`
-	NEXTTELEMETRYDISABLED string `yaml:"NEXT_TELEMETRY_DISABLED"`
+	CONSOLE_API_URL         string `yaml:"CONSOLE_API_URL"`
+	APP_API_URL             string `yaml:"APP_API_URL"`
+	SENTRY_DSN              string `yaml:"SENTRY_DSN"`
+	NEXT_TELEMETRY_DISABLED string `yaml:"NEXT_TELEMETRY_DISABLED"`
 }
 
 func CreateDifyWeb() Web {
@@ -23,10 +23,10 @@ func CreateDifyWeb() Web {
 		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_WEB),
 		Restart: "always",
 		Environment: WebEnvirontment{
-			CONSOLEAPIURL:         "${CONSOLE_API_URL:-}",
-			APPAPIURL:             "${APP_API_URL:-}",
-			SENTRYDSN:             "${WEB_SENTRY_DSN:-}",
-			NEXTTELEMETRYDISABLED: "${NEXT_TELEMETRY_DISABLED:-0}",
+			CONSOLE_API_URL:         "${CONSOLE_API_URL:-}",
+			APP_API_URL:             "${APP_API_URL:-}",
+			SENTRY_DSN:              "${WEB_SENTRY_DSN:-}",
+			NEXT_TELEMETRY_DISABLED: "${NEXT_TELEMETRY_DISABLED:-0}",
 		},
 	}
 }
