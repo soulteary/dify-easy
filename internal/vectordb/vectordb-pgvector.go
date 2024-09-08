@@ -1,7 +1,8 @@
 package VectorDB
 
 import (
-	"github.com/soulteary/dify-easy/fn"
+	Define "github.com/soulteary/dify-easy/define"
+	Fn "github.com/soulteary/dify-easy/fn"
 )
 
 type Pgvector struct {
@@ -10,15 +11,7 @@ type Pgvector struct {
 	Restart     string              `yaml:"restart"`
 	Environment PgvectorEnvironment `yaml:"environment"`
 	Volumes     []string            `yaml:"volumes"`
-	Healthcheck HealthCheck         `yaml:"healthcheck"`
-}
-
-type HealthCheck struct {
-	Test        string `yaml:"test"`
-	Interval    string `yaml:"interval,omitempty"`
-	StartPeriod string `yaml:"start_period,omitempty"`
-	Timeout     string `yaml:"timeout,omitempty"`
-	Retries     int    `yaml:"retries,omitempty"`
+	Healthcheck Define.HealthCheck  `yaml:"healthcheck"`
 }
 
 type PgvectorEnvironment struct {
@@ -46,7 +39,7 @@ func CreatePgvector() Pgvector {
 
 	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "pg_isready"})
 	if err == nil {
-		config.Healthcheck = HealthCheck{
+		config.Healthcheck = Define.HealthCheck{
 			Test: healthCheckCmd,
 		}
 		config.Healthcheck.Interval = "1s"

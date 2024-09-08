@@ -2,6 +2,7 @@ package DifyCore
 
 import (
 	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
 	Fn "github.com/soulteary/dify-easy/fn"
 )
 
@@ -15,7 +16,7 @@ type Redis struct {
 
 func CreateDifyRedis() Redis {
 	config := Redis{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_REDIS),
+		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_REDIS),
 		Restart: "always",
 		Volumes: []string{
 			"./volumes/redis/data:/data",

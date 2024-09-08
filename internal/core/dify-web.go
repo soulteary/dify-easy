@@ -1,6 +1,9 @@
 package DifyCore
 
-import CustomConfig "github.com/soulteary/dify-easy/custom-config"
+import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
+)
 
 type Web struct {
 	Image       string          `yaml:"image"`
@@ -17,7 +20,7 @@ type WebEnvirontment struct {
 
 func CreateDifyWeb() Web {
 	return Web{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_WEB),
+		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_WEB),
 		Restart: "always",
 		Environment: WebEnvirontment{
 			CONSOLEAPIURL:         "${CONSOLE_API_URL:-}",

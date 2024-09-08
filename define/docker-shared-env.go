@@ -1,4 +1,4 @@
-package DeployConfig
+package Define
 
 type XSharedEnv struct {
 	LOG_LEVEL   string `yaml:"LOG_LEVEL"`

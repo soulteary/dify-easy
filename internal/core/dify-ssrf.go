@@ -2,6 +2,7 @@ package DifyCore
 
 import (
 	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
 	Fn "github.com/soulteary/dify-easy/fn"
 )
 
@@ -25,7 +26,7 @@ type SsrfProxyEnvironment struct {
 func CreateDifySsrfProxy() SsrfProxy {
 
 	config := SsrfProxy{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_SSRF_PROXY),
+		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_SSRF_PROXY),
 		Restart: "always",
 		Volumes: []string{
 			"./ssrf_proxy/squid.conf.template:/etc/squid/squid.conf.template",

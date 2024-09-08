@@ -1,6 +1,9 @@
 package DifyCore
 
-import CustomConfig "github.com/soulteary/dify-easy/custom-config"
+import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
+)
 
 type Sandbox struct {
 	Image       string             `yaml:"image"`
@@ -22,7 +25,7 @@ type SandboxEnvironment struct {
 
 func CreateDifySandbox() Sandbox {
 	return Sandbox{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_SANDBOX),
+		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_SANDBOX),
 		Restart: "always",
 		Environment: SandboxEnvironment{
 			APIKEY:        "${SANDBOX_API_KEY:-dify-sandbox}",

@@ -1,7 +1,8 @@
 package VectorDB
 
 import (
-	"github.com/soulteary/dify-easy/fn"
+	Define "github.com/soulteary/dify-easy/define"
+	Fn "github.com/soulteary/dify-easy/fn"
 )
 
 type Elasticsearch struct {
@@ -12,7 +13,7 @@ type Elasticsearch struct {
 	Volumes       []string                 `yaml:"volumes"`
 	Environment   ElasticsearchEnvironment `yaml:"environment"`
 	Ports         []string                 `yaml:"ports"`
-	Healthcheck   HealthCheck              `yaml:"healthcheck"`
+	Healthcheck   Define.HealthCheck       `yaml:"healthcheck"`
 }
 
 type ElasticsearchEnvironment struct {
@@ -52,7 +53,7 @@ func CreateElasticsearch() Elasticsearch {
 
 	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "curl", "-s", "http://localhost:9200/_cluster/health?pretty"})
 	if err == nil {
-		config.Healthcheck = HealthCheck{
+		config.Healthcheck = Define.HealthCheck{
 			Test: healthCheckCmd,
 		}
 		config.Healthcheck.Interval = "30s"
@@ -64,14 +65,14 @@ func CreateElasticsearch() Elasticsearch {
 }
 
 type Kibana struct {
-	Image         string            `yaml:"image"`
-	ContainerName string            `yaml:"container_name"`
-	Profiles      []string          `yaml:"profiles"`
-	DependsOn     []string          `yaml:"depends_on"`
-	Restart       string            `yaml:"restart"`
-	Environment   KibanaEnvironment `yaml:"environment"`
-	Ports         []string          `yaml:"ports"`
-	Healthcheck   HealthCheck       `yaml:"healthcheck"`
+	Image         string             `yaml:"image"`
+	ContainerName string             `yaml:"container_name"`
+	Profiles      []string           `yaml:"profiles"`
+	DependsOn     []string           `yaml:"depends_on"`
+	Restart       string             `yaml:"restart"`
+	Environment   KibanaEnvironment  `yaml:"environment"`
+	Ports         []string           `yaml:"ports"`
+	Healthcheck   Define.HealthCheck `yaml:"healthcheck"`
 }
 
 type KibanaEnvironment struct {
@@ -111,7 +112,7 @@ func CreateKibana() Kibana {
 
 	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD-SHELL", "curl -s http://localhost:5601 >/dev/null || exit 1"})
 	if err == nil {
-		config.Healthcheck = HealthCheck{
+		config.Healthcheck = Define.HealthCheck{
 			Test: healthCheckCmd,
 		}
 		config.Healthcheck.Interval = "30s"

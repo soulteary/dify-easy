@@ -1,6 +1,9 @@
 package DifyCore
 
-import CustomConfig "github.com/soulteary/dify-easy/custom-config"
+import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
+)
 
 type Worker struct {
 	Image   string `yaml:"image"`
@@ -14,7 +17,7 @@ type Worker struct {
 
 func CreateDifyWorker() Worker {
 	return Worker{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_WORKER),
+		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_WORKER),
 		Restart: "always",
 		Environment: map[string]any{
 			"<<":   "*shared-api-worker-env",

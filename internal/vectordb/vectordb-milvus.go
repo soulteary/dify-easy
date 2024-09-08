@@ -1,7 +1,8 @@
 package VectorDB
 
 import (
-	"github.com/soulteary/dify-easy/fn"
+	Define "github.com/soulteary/dify-easy/define"
+	Fn "github.com/soulteary/dify-easy/fn"
 )
 
 type MilvusEtcd struct {
@@ -11,7 +12,7 @@ type MilvusEtcd struct {
 	Environment   MilvusEtcdEnvironment `yaml:"environment"`
 	Volumes       []string              `yaml:"volumes"`
 	Command       string                `yaml:"command"`
-	Healthcheck   HealthCheck           `yaml:"healthcheck"`
+	Healthcheck   Define.HealthCheck    `yaml:"healthcheck"`
 	Networks      []string              `yaml:"networks"`
 }
 
@@ -42,7 +43,7 @@ func CreateMilvusEtcd() MilvusEtcd {
 
 	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "etcdctl", "endpoint", "health"})
 	if err == nil {
-		config.Healthcheck = HealthCheck{
+		config.Healthcheck = Define.HealthCheck{
 			Test: healthCheckCmd,
 		}
 		config.Healthcheck.Interval = "30s"
@@ -60,7 +61,7 @@ type MilvusMinio struct {
 	Environment   MilvusMinioEnvironment `yaml:"environment"`
 	Volumes       []string               `yaml:"volumes"`
 	Command       string                 `yaml:"command"`
-	Healthcheck   HealthCheck            `yaml:"healthcheck"`
+	Healthcheck   Define.HealthCheck     `yaml:"healthcheck"`
 	Networks      []string               `yaml:"networks"`
 }
 
@@ -87,7 +88,7 @@ func CreateMilvusMinio() MilvusMinio {
 
 	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "curl", "-f", "http://localhost:9000/minio/health/live"})
 	if err == nil {
-		config.Healthcheck = HealthCheck{
+		config.Healthcheck = Define.HealthCheck{
 			Test: healthCheckCmd,
 		}
 		config.Healthcheck.Interval = "30s"
@@ -99,16 +100,16 @@ func CreateMilvusMinio() MilvusMinio {
 }
 
 type MilvusStandalone struct {
-	ContainerName string            `yaml:"container_name"`
-	Image         string            `yaml:"image"`
-	Profiles      []string          `yaml:"profiles"`
-	Command       string            `yaml:"command"`
-	Environment   MilvusEnvironment `yaml:"environment"`
-	Volumes       []string          `yaml:"volumes"`
-	Healthcheck   HealthCheck       `yaml:"healthcheck"`
-	DependsOn     []string          `yaml:"depends_on"`
-	Networks      []string          `yaml:"networks"`
-	Ports         []string          `yaml:"ports"`
+	ContainerName string             `yaml:"container_name"`
+	Image         string             `yaml:"image"`
+	Profiles      []string           `yaml:"profiles"`
+	Command       string             `yaml:"command"`
+	Environment   MilvusEnvironment  `yaml:"environment"`
+	Volumes       []string           `yaml:"volumes"`
+	Healthcheck   Define.HealthCheck `yaml:"healthcheck"`
+	DependsOn     []string           `yaml:"depends_on"`
+	Networks      []string           `yaml:"networks"`
+	Ports         []string           `yaml:"ports"`
 }
 
 type MilvusEnvironment struct {
@@ -137,7 +138,7 @@ func CreateMilvusStandalone() MilvusStandalone {
 
 	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "curl", "-f", "http://localhost:9091/healthz"})
 	if err == nil {
-		config.Healthcheck = HealthCheck{
+		config.Healthcheck = Define.HealthCheck{
 			Test: healthCheckCmd,
 		}
 		config.Healthcheck.Interval = "30s"

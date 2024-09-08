@@ -2,6 +2,7 @@ package DifyCore
 
 import (
 	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
 )
 
 type API struct {
@@ -16,7 +17,7 @@ type API struct {
 
 func CreateDifyAPI() API {
 	return API{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_API),
+		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_API),
 		Restart: "always",
 		Environment: map[string]any{
 			"<<":   "*shared-api-worker-env",

@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
 	Fn "github.com/soulteary/dify-easy/fn"
 )
 
@@ -25,7 +26,7 @@ type DBEnvironment struct {
 
 func CreateDifyDB() DB {
 	config := DB{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_POSTGRES),
+		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_POSTGRES),
 		Restart: "always",
 		Environment: DBEnvironment{
 			PGUSER:           "${PGUSER:-postgres}",

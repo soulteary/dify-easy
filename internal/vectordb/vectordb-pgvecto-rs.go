@@ -1,7 +1,8 @@
 package VectorDB
 
 import (
-	"github.com/soulteary/dify-easy/fn"
+	Define "github.com/soulteary/dify-easy/define"
+	Fn "github.com/soulteary/dify-easy/fn"
 )
 
 type PgvectoRs struct {
@@ -10,7 +11,7 @@ type PgvectoRs struct {
 	Restart     string               `yaml:"restart"`
 	Environment PgvectoRsEnvironment `yaml:"environment"`
 	Volumes     []string             `yaml:"volumes"`
-	Healthcheck HealthCheck          `yaml:"healthcheck"`
+	Healthcheck Define.HealthCheck   `yaml:"healthcheck"`
 }
 
 type PgvectoRsEnvironment struct {
@@ -38,7 +39,7 @@ func CreatePgvectorRs() PgvectoRs {
 
 	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "pg_isready"})
 	if err == nil {
-		config.Healthcheck = HealthCheck{
+		config.Healthcheck = Define.HealthCheck{
 			Test: healthCheckCmd,
 		}
 		config.Healthcheck.Interval = "1s"

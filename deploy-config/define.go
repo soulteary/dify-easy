@@ -1,6 +1,7 @@
 package DeployConfig
 
 import (
+	Define "github.com/soulteary/dify-easy/define"
 	DifyCore "github.com/soulteary/dify-easy/internal/core"
 	DifyNetwork "github.com/soulteary/dify-easy/internal/network"
 	VectorDB "github.com/soulteary/dify-easy/internal/vectordb"
@@ -8,7 +9,7 @@ import (
 )
 
 type DifyDeploy struct {
-	DifyCore.XSharedEnv `yaml:"x-shared-env,omitempty"`
+	Define.XSharedEnv `yaml:"x-shared-env,omitempty"`
 
 	Services struct {
 		DifyCore.API       `yaml:"api"`
