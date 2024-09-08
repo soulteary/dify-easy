@@ -14,7 +14,7 @@ type Worker struct {
 
 func CreateDifyWorker() Worker {
 	return Worker{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_WORKER),
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_WORKER),
 		Restart: "always",
 		Environment: map[string]any{
 			"<<":   "*shared-api-worker-env",

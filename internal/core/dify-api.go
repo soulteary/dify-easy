@@ -16,7 +16,7 @@ type API struct {
 
 func CreateDifyAPI() API {
 	return API{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_API),
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_API),
 		Restart: "always",
 		Environment: map[string]any{
 			"<<":   "*shared-api-worker-env",

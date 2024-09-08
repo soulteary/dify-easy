@@ -15,7 +15,7 @@ type Redis struct {
 
 func CreateDifyRedis() Redis {
 	config := Redis{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_REDIS),
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_REDIS),
 		Restart: "always",
 		Volumes: []string{
 			"./volumes/redis/data:/data",

@@ -16,7 +16,7 @@ type Certbot struct {
 
 func CreateDifyCertbot() Certbot {
 	config := Certbot{
-		Image:    CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_CERTBOT),
+		Image:    CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_CERTBOT),
 		Profiles: []string{"certbot"},
 		Volumes: []string{
 			"./volumes/certbot/conf:/etc/letsencrypt",

@@ -25,7 +25,7 @@ type SsrfProxyEnvironment struct {
 func CreateDifySsrfProxy() SsrfProxy {
 
 	config := SsrfProxy{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_SSRF_PROXY),
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_SSRF_PROXY),
 		Restart: "always",
 		Volumes: []string{
 			"./ssrf_proxy/squid.conf.template:/etc/squid/squid.conf.template",

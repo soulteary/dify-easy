@@ -17,7 +17,7 @@ type WebEnvirontment struct {
 
 func CreateDifyWeb() Web {
 	return Web{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_WEB),
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_WEB),
 		Restart: "always",
 		Environment: WebEnvirontment{
 			CONSOLEAPIURL:         "${CONSOLE_API_URL:-}",

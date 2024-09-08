@@ -1,5 +1,7 @@
 package DifyCore
 
+import CustomConfig "github.com/soulteary/dify-easy/custom-config"
+
 type Unstructured struct {
 	Image    string   `yaml:"image"`
 	Profiles []string `yaml:"profiles"`
@@ -9,7 +11,7 @@ type Unstructured struct {
 
 func CreateUnstructured() Unstructured {
 	return Unstructured{
-		Image:    "downloads.unstructured.io/unstructured-io/unstructured-api:latest",
+		Image:    CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_UNSTRUCTURED),
 		Profiles: []string{"unstructured"},
 		Restart:  "always",
 		Volumes: []string{

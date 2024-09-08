@@ -34,7 +34,7 @@ type NginxEnvironment struct {
 
 func CreateDifyNginx() Nginx {
 	config := Nginx{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_NGINX),
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_NGINX),
 		Restart: "always",
 		Volumes: []string{
 			"./nginx/nginx.conf.template:/etc/nginx/nginx.conf.template",

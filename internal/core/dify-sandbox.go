@@ -22,7 +22,7 @@ type SandboxEnvironment struct {
 
 func CreateDifySandbox() Sandbox {
 	return Sandbox{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_SANDBOX),
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_SANDBOX),
 		Restart: "always",
 		Environment: SandboxEnvironment{
 			APIKEY:        "${SANDBOX_API_KEY:-dify-sandbox}",

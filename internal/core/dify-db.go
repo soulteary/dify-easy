@@ -25,7 +25,7 @@ type DBEnvironment struct {
 
 func CreateDifyDB() DB {
 	config := DB{
-		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_POSTGRES),
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_SERVICE_DIFY_POSTGRES),
 		Restart: "always",
 		Environment: DBEnvironment{
 			PGUSER:           "${PGUSER:-postgres}",
