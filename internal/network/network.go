@@ -1,39 +1,31 @@
 package DifyNetwork
 
 type Networks struct {
-	SsrfProxyNetwork struct {
-		Driver   string `yaml:"driver"`
-		Internal bool   `yaml:"internal"`
-	} `yaml:"ssrf_proxy_network"`
-	Milvus struct {
-		Driver string `yaml:"driver"`
-	} `yaml:"milvus"`
-	OpensearchNet struct {
-		Driver   string `yaml:"driver"`
-		Internal bool   `yaml:"internal"`
-	} `yaml:"opensearch-net"`
+	SsrfProxyNetwork Network `yaml:"ssrf_proxy_network"`
+	Milvus           Network `yaml:"milvus"`
+	OpensearchNet    Network `yaml:"opensearch-net"`
+}
+
+type Network struct {
+	Driver   string `yaml:"driver"`
+	Internal bool   `yaml:"internal,omitempty"`
 }
 
 func CreateNetworks() Networks {
-	return Networks{
-		SsrfProxyNetwork: struct {
-			Driver   string `yaml:"driver"`
-			Internal bool   `yaml:"internal"`
-		}{
-			Driver:   "bridge",
-			Internal: true,
-		},
-		Milvus: struct {
-			Driver string `yaml:"driver"`
-		}{
-			Driver: "bridge",
-		},
-		OpensearchNet: struct {
-			Driver   string `yaml:"driver"`
-			Internal bool   `yaml:"internal"`
-		}{
-			Driver:   "bridge",
-			Internal: true,
-		},
+	networks := Networks{}
+	networks.SsrfProxyNetwork = Network{
+		Driver:   "bridge",
+		Internal: true,
 	}
+
+	networks.Milvus = Network{
+		Driver: "bridge",
+	}
+
+	networks.OpensearchNet = Network{
+		Driver:   "bridge",
+		Internal: true,
+	}
+
+	return networks
 }
