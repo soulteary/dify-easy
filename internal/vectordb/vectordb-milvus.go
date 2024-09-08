@@ -108,6 +108,7 @@ type MilvusStandalone struct {
 	Healthcheck   HealthCheck       `yaml:"healthcheck"`
 	DependsOn     []string          `yaml:"depends_on"`
 	Networks      []string          `yaml:"networks"`
+	Ports         []string          `yaml:"ports"`
 }
 
 type MilvusEnvironment struct {
@@ -131,6 +132,7 @@ func CreateMilvusStandalone() MilvusStandalone {
 		},
 		DependsOn: []string{"etcd", "minio"},
 		Networks:  []string{"milvus"},
+		Ports:     []string{"19530:19530", "9091:9091"},
 	}
 
 	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "curl", "-f", "http://localhost:9091/healthz"})
