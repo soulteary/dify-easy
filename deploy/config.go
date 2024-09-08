@@ -26,7 +26,8 @@ type DifyDeploy struct {
 
 		VectorDB.Qdrant `yaml:"qdrant,omitempty"`
 
-		VectorDB.Pgvector  `yaml:"pgvector,omitempty"`
+		VectorDB.Pgvector `yaml:"pgvector,omitempty"`
+
 		VectorDB.PgvectoRs `yaml:"pgvecto-rs,omitempty"`
 
 		VectorDB.Chroma `yaml:"chroma,omitempty"`
@@ -68,6 +69,10 @@ func CreateConfig() DifyDeploy {
 
 	config.Services.Weaviate = VectorDB.CreateWeaviate()
 	config.Services.Qdrant = VectorDB.CreateQdrant()
+	config.Services.Pgvector = VectorDB.CreatePgvector()
+	config.Services.PgvectoRs = VectorDB.CreatePgvectorRs()
+	config.Services.Chroma = VectorDB.CreateChroma()
+	config.Services.Oracle = VectorDB.CreateOracle()
 
 	config.Networks = DifyNetwork.CreateNetworks()
 	config.Volumes = DifyVolume.CreateVolumes()
