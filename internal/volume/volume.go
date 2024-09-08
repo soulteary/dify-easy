@@ -6,8 +6,8 @@ type Volumes struct {
 }
 
 func CreateVolumes() Volumes {
-	return Volumes{
-		Oradata:      "keep-empty",
-		DifyEs01Data: "keep-empty",
-	}
+	volumes := Volumes{}
+	volumes.Oradata = "keep-empty"
+	volumes.DifyEs01Data = "keep-empty"
+	return volumes
 }
