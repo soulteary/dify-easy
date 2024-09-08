@@ -1,7 +1,8 @@
 package DifyCore
 
 import (
-	"github.com/soulteary/dify-easy/fn"
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Fn "github.com/soulteary/dify-easy/fn"
 )
 
 type Certbot struct {
@@ -15,7 +16,7 @@ type Certbot struct {
 
 func CreateDifyCertbot() Certbot {
 	config := Certbot{
-		Image:    "certbot/certbot",
+		Image:    CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_CERTBOT),
 		Profiles: []string{"certbot"},
 		Volumes: []string{
 			"./volumes/certbot/conf:/etc/letsencrypt",

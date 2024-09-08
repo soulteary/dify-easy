@@ -1,5 +1,7 @@
 package DifyCore
 
+import CustomConfig "github.com/soulteary/dify-easy/custom-config"
+
 type Sandbox struct {
 	Image       string             `yaml:"image"`
 	Restart     string             `yaml:"restart"`
@@ -20,7 +22,7 @@ type SandboxEnvironment struct {
 
 func CreateDifySandbox() Sandbox {
 	return Sandbox{
-		Image:   "langgenius/dify-sandbox:0.2.6",
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_SANDBOX),
 		Restart: "always",
 		Environment: SandboxEnvironment{
 			APIKEY:        "${SANDBOX_API_KEY:-dify-sandbox}",

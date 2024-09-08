@@ -1,7 +1,8 @@
 package DifyCore
 
 import (
-	"github.com/soulteary/dify-easy/fn"
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Fn "github.com/soulteary/dify-easy/fn"
 )
 
 type Nginx struct {
@@ -33,7 +34,7 @@ type NginxEnvironment struct {
 
 func CreateDifyNginx() Nginx {
 	config := Nginx{
-		Image:   "nginx:latest",
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_NGINX),
 		Restart: "always",
 		Volumes: []string{
 			"./nginx/nginx.conf.template:/etc/nginx/nginx.conf.template",

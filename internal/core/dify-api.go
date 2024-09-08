@@ -1,5 +1,9 @@
 package DifyCore
 
+import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+)
+
 type API struct {
 	Image   string `yaml:"image"`
 	Restart string `yaml:"restart"`
@@ -12,7 +16,7 @@ type API struct {
 
 func CreateDifyAPI() API {
 	return API{
-		Image:   "langgenius/dify-api:0.7.3",
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_API),
 		Restart: "always",
 		Environment: map[string]any{
 			"<<":   "*shared-api-worker-env",

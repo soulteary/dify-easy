@@ -3,7 +3,8 @@ package DifyCore
 import (
 	"strings"
 
-	"github.com/soulteary/dify-easy/fn"
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Fn "github.com/soulteary/dify-easy/fn"
 )
 
 type DB struct {
@@ -24,7 +25,7 @@ type DBEnvironment struct {
 
 func CreateDifyDB() DB {
 	config := DB{
-		Image:   "postgres:15-alpine",
+		Image:   CustomConfig.GetImage(CustomConfig.DOCKER_IMAGE_TYPE_DIFY_POSTGRES),
 		Restart: "always",
 		Environment: DBEnvironment{
 			PGUSER:           "${PGUSER:-postgres}",
