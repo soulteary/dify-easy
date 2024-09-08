@@ -256,3 +256,28 @@ type XSharedEnv struct {
 	SSRF_PROXY_HTTP_URL  string `yaml:"SSRF_PROXY_HTTP_URL"`
 	SSRF_PROXY_HTTPS_URL string `yaml:"SSRF_PROXY_HTTPS_URL"`
 }
+
+type DifyAPI struct {
+	Image   string `yaml:"image"`
+	Restart string `yaml:"restart"`
+	// Environment XSharedEnv `yaml:"environment"`
+	Environment DifyEnvirontment `yaml:"environment"`
+	DependsOn   []string         `yaml:"depends_on"`
+	Volumes     []string         `yaml:"volumes"`
+	Networks    []string         `yaml:"networks"`
+}
+
+type DifyWorker DifyAPI
+
+type DifyWeb struct {
+	Image       string              `yaml:"image"`
+	Restart     string              `yaml:"restart"`
+	Environment DifyWebEnvirontment `yaml:"environment"`
+}
+
+type DifyWebEnvirontment struct {
+	CONSOLE_API_URL         string `yaml:"CONSOLE_API_URL"`
+	APP_API_URL             string `yaml:"APP_API_URL"`
+	SENTRY_DSN              string `yaml:"SENTRY_DSN"`
+	NEXT_TELEMETRY_DISABLED string `yaml:"NEXT_TELEMETRY_DISABLED"`
+}

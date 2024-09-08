@@ -17,9 +17,9 @@ func Create() DifyDeploy {
 
 	config.XSharedEnv = CustomConfig.GetXSharedEnv()
 
-	config.Services.API = DifyCore.CreateDifyAPI()
-	config.Services.Worker = DifyCore.CreateDifyWorker()
-	config.Services.Web = DifyCore.CreateDifyWeb()
+	config.Services.DifyAPI = DifyCore.CreateDifyAPI()
+	config.Services.DifyWorker = DifyCore.CreateDifyWorker()
+	config.Services.DifyWeb = DifyCore.CreateDifyWeb()
 	config.Services.DB = DifyCore.CreateDifyDB()
 	config.Services.Redis = DifyCore.CreateDifyRedis()
 	config.Services.Sandbox = DifyCore.CreateDifySandbox()

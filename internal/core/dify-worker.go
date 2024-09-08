@@ -5,18 +5,8 @@ import (
 	Define "github.com/soulteary/dify-easy/define"
 )
 
-type Worker struct {
-	Image   string `yaml:"image"`
-	Restart string `yaml:"restart"`
-	// Environment XSharedEnv `yaml:"environment"`
-	Environment Define.DifyEnvirontment `yaml:"environment"`
-	DependsOn   []string                `yaml:"depends_on"`
-	Volumes     []string                `yaml:"volumes"`
-	Networks    []string                `yaml:"networks"`
-}
-
-func CreateDifyWorker() Worker {
-	return Worker{
+func CreateDifyWorker() Define.DifyWorker {
+	return Define.DifyWorker{
 		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_WORKER),
 		Restart: "always",
 		Environment: Define.DifyEnvirontment{

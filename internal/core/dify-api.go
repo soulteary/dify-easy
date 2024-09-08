@@ -5,18 +5,8 @@ import (
 	Define "github.com/soulteary/dify-easy/define"
 )
 
-type API struct {
-	Image   string `yaml:"image"`
-	Restart string `yaml:"restart"`
-	// Environment XSharedEnv `yaml:"environment"`
-	Environment Define.DifyEnvirontment `yaml:"environment"`
-	DependsOn   []string                `yaml:"depends_on"`
-	Volumes     []string                `yaml:"volumes"`
-	Networks    []string                `yaml:"networks"`
-}
-
-func CreateDifyAPI() API {
-	return API{
+func CreateDifyAPI() Define.DifyAPI {
+	return Define.DifyAPI{
 		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_API),
 		Restart: "always",
 		Environment: Define.DifyEnvirontment{

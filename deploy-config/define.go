@@ -12,9 +12,9 @@ type DifyDeploy struct {
 	Define.XSharedEnv `yaml:"x-shared-env,omitempty"`
 
 	Services struct {
-		DifyCore.API       `yaml:"api"`
-		DifyCore.Worker    `yaml:"worker"`
-		DifyCore.Web       `yaml:"web"`
+		Define.DifyAPI     `yaml:"api"`
+		Define.DifyWorker  `yaml:"worker"`
+		Define.DifyWeb     `yaml:"web"`
 		DifyCore.DB        `yaml:"db"`
 		DifyCore.Redis     `yaml:"redis"`
 		DifyCore.Sandbox   `yaml:"sandbox"`
