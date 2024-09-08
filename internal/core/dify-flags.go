@@ -2,13 +2,6 @@ package DifyCore
 
 import Define "github.com/soulteary/dify-easy/define"
 
-type HealthCheck struct {
-	Test     string `yaml:"test"`
-	Interval string `yaml:"interval,omitempty"`
-	Timeout  string `yaml:"timeout,omitempty"`
-	Retries  int    `yaml:"retries,omitempty"`
-}
-
 func CreateXSharedEnv() Define.XSharedEnv {
 	return Define.XSharedEnv{
 		LOG_LEVEL:   "${LOG_LEVEL:-INFO}",

@@ -9,12 +9,12 @@ import (
 )
 
 type DB struct {
-	Image       string        `yaml:"image"`
-	Restart     string        `yaml:"restart"`
-	Environment DBEnvironment `yaml:"environment"`
-	Command     string        `yaml:"command"`
-	Volumes     []string      `yaml:"volumes"`
-	Healthcheck HealthCheck   `yaml:"healthcheck"`
+	Image       string             `yaml:"image"`
+	Restart     string             `yaml:"restart"`
+	Environment DBEnvironment      `yaml:"environment"`
+	Command     string             `yaml:"command"`
+	Volumes     []string           `yaml:"volumes"`
+	Healthcheck Define.HealthCheck `yaml:"healthcheck"`
 }
 
 type DBEnvironment struct {
@@ -49,7 +49,7 @@ func CreateDifyDB() DB {
 
 	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "pg_isready"})
 	if err == nil {
-		config.Healthcheck = HealthCheck{
+		config.Healthcheck = Define.HealthCheck{
 			Test:     healthCheckCmd,
 			Interval: "1s",
 			Timeout:  "3s",

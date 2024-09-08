@@ -7,11 +7,11 @@ import (
 )
 
 type Redis struct {
-	Image       string      `yaml:"image"`
-	Restart     string      `yaml:"restart"`
-	Volumes     []string    `yaml:"volumes"`
-	Command     string      `yaml:"command"`
-	Healthcheck HealthCheck `yaml:"healthcheck"`
+	Image       string             `yaml:"image"`
+	Restart     string             `yaml:"restart"`
+	Volumes     []string           `yaml:"volumes"`
+	Command     string             `yaml:"command"`
+	Healthcheck Define.HealthCheck `yaml:"healthcheck"`
 }
 
 func CreateDifyRedis() Redis {
@@ -26,7 +26,7 @@ func CreateDifyRedis() Redis {
 
 	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "redis-cli", "ping"})
 	if err == nil {
-		config.Healthcheck = HealthCheck{
+		config.Healthcheck = Define.HealthCheck{
 			Test: healthCheckCmd,
 		}
 	}
