@@ -1,4 +1,4 @@
-package Deploy
+package DeployConfig
 
 import (
 	DifyCore "github.com/soulteary/dify-easy/internal/core"
@@ -51,46 +51,4 @@ type DifyDeploy struct {
 	DifyNetwork.Networks `yaml:"networks"`
 
 	DifyVolume.Volumes `yaml:"volumes"`
-}
-
-func CreateConfig() DifyDeploy {
-	config := DifyDeploy{}
-
-	config.XSharedEnv = DifyCore.CreateXSharedEnv()
-
-	config.Services.API = DifyCore.CreateDifyAPI()
-	config.Services.Worker = DifyCore.CreateDifyWorker()
-	config.Services.Web = DifyCore.CreateDifyWeb()
-	config.Services.DB = DifyCore.CreateDifyDB()
-	config.Services.Redis = DifyCore.CreateDifyRedis()
-	config.Services.Sandbox = DifyCore.CreateDifySandbox()
-	config.Services.Certbot = DifyCore.CreateDifyCertbot()
-	config.Services.Nginx = DifyCore.CreateDifyNginx()
-	config.Services.SsrfProxy = DifyCore.CreateDifySsrfProxy()
-
-	config.Services.Weaviate = VectorDB.CreateWeaviate()
-	config.Services.Qdrant = VectorDB.CreateQdrant()
-	config.Services.Pgvector = VectorDB.CreatePgvector()
-	config.Services.PgvectoRs = VectorDB.CreatePgvectorRs()
-	config.Services.Chroma = VectorDB.CreateChroma()
-	config.Services.Oracle = VectorDB.CreateOracle()
-
-	config.Services.MilvusEtcd = VectorDB.CreateMilvusEtcd()
-	config.Services.MilvusMinio = VectorDB.CreateMilvusMinio()
-	config.Services.MilvusStandalone = VectorDB.CreateMilvusStandalone()
-
-	config.Services.Opensearch = VectorDB.CreateOpensearch()
-	config.Services.OpensearchDashboards = VectorDB.CreateOpenSearchDashboards()
-
-	config.Services.Myscale = VectorDB.CreateMyscale()
-
-	config.Services.Elasticsearch = VectorDB.CreateElasticsearch()
-	config.Services.Kibana = VectorDB.CreateKibana()
-
-	config.Services.Unstructured = DifyCore.CreateUnstructured()
-
-	config.Networks = DifyNetwork.CreateNetworks()
-	config.Volumes = DifyVolume.CreateVolumes()
-
-	return config
 }
