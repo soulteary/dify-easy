@@ -1,8 +1,8 @@
 package VectorDB
 
 import (
-	CustomConfig "github.com/soulteary/dify-easy/custom-config"
 	Define "github.com/soulteary/dify-easy/define"
+	CustomConfig "github.com/soulteary/dify-easy/internal/custom-config"
 )
 
 type Weaviate struct {

@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	DeployConfig "github.com/soulteary/dify-easy/deploy-config"
+	DeployConfig "github.com/soulteary/dify-easy/internal/deploy-config"
 	"github.com/soulteary/dify-easy/internal/server"
 	"github.com/soulteary/dify-easy/internal/version"
 )

@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"fmt"
 
-	CustomConfig "github.com/soulteary/dify-easy/custom-config"
 	DifyCore "github.com/soulteary/dify-easy/internal/core"
+	CustomConfig "github.com/soulteary/dify-easy/internal/custom-config"
 	DifyNetwork "github.com/soulteary/dify-easy/internal/network"
 	VectorDB "github.com/soulteary/dify-easy/internal/vectordb"
 	DifyVolume "github.com/soulteary/dify-easy/internal/volume"

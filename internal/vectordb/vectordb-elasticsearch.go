@@ -1,9 +1,9 @@
 package VectorDB
 
 import (
-	CustomConfig "github.com/soulteary/dify-easy/custom-config"
 	Define "github.com/soulteary/dify-easy/define"
-	Fn "github.com/soulteary/dify-easy/fn"
+	CustomConfig "github.com/soulteary/dify-easy/internal/custom-config"
+	Fn "github.com/soulteary/dify-easy/internal/fn"
 )
 
 type Elasticsearch struct {
