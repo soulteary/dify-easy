@@ -1,5 +1,10 @@
 package VectorDB
 
+import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
+)
+
 type Weaviate struct {
 	Image       string              `yaml:"image"`
 	Profiles    []string            `yaml:"profiles"`
@@ -23,7 +28,7 @@ type WeaviateEnvironment struct {
 
 func CreateWeaviate() Weaviate {
 	config := Weaviate{
-		Image: "semitechnologies/weaviate:1.19.0",
+		Image: CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_WEAVIATE),
 		Profiles: []string{
 			"",
 			"weaviate",

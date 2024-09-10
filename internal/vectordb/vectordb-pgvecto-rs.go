@@ -1,6 +1,7 @@
 package VectorDB
 
 import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
 	Define "github.com/soulteary/dify-easy/define"
 	Fn "github.com/soulteary/dify-easy/fn"
 )
@@ -23,7 +24,7 @@ type PgvectoRsEnvironment struct {
 
 func CreatePgvectorRs() PgvectoRs {
 	config := PgvectoRs{
-		Image:    "tensorchord/pgvecto-rs:pg16-v0.3.0",
+		Image:    CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_PGVECTO_RS),
 		Profiles: []string{"pgvecto-rs"},
 		Restart:  "always",
 		Environment: PgvectoRsEnvironment{

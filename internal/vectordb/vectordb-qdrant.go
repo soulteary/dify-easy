@@ -1,5 +1,10 @@
 package VectorDB
 
+import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
+)
+
 type Qdrant struct {
 	Image       string            `yaml:"image"`
 	Profiles    []string          `yaml:"profiles"`
@@ -14,7 +19,7 @@ type QdrantEnvironment struct {
 
 func CreateQdrant() Qdrant {
 	config := Qdrant{
-		Image: "langgenius/qdrant:v1.7.3",
+		Image: CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_QDRANT),
 		Profiles: []string{
 			"qdrant",
 		},
