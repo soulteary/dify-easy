@@ -3,6 +3,7 @@ package DifyCore
 import (
 	CustomConfig "github.com/soulteary/dify-easy/custom-config"
 	Define "github.com/soulteary/dify-easy/define"
+	Fn "github.com/soulteary/dify-easy/fn"
 )
 
 type Sandbox struct {
@@ -11,6 +12,7 @@ type Sandbox struct {
 	Environment SandboxEnvironment `yaml:"environment"`
 	Volumes     []string           `yaml:"volumes"`
 	Networks    []string           `yaml:"networks"`
+	Healthcheck Define.HealthCheck `yaml:"healthcheck"`
 }
 
 type SandboxEnvironment struct {
@@ -24,7 +26,7 @@ type SandboxEnvironment struct {
 }
 
 func CreateDifySandbox() Sandbox {
-	return Sandbox{
+	config := Sandbox{
 		Image:   CustomConfig.GetImage(Define.DOCKER_SERVICE_DIFY_SANDBOX),
 		Restart: "always",
 		Environment: SandboxEnvironment{
@@ -43,4 +45,12 @@ func CreateDifySandbox() Sandbox {
 			"ssrf_proxy_network",
 		},
 	}
+
+	healthCheckCmd, err := Fn.ConvertArrToCommand([]string{"CMD", "curl", "-f", "http://localhost:8194/health"})
+	if err == nil {
+		config.Healthcheck = Define.HealthCheck{
+			Test: healthCheckCmd,
+		}
+	}
+	return config
 }
