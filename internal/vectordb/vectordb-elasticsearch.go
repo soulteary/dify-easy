@@ -1,6 +1,7 @@
 package VectorDB
 
 import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
 	Define "github.com/soulteary/dify-easy/define"
 	Fn "github.com/soulteary/dify-easy/fn"
 )
@@ -29,7 +30,7 @@ type ElasticsearchEnvironment struct {
 
 func CreateElasticsearch() Elasticsearch {
 	config := Elasticsearch{
-		Image:         "docker.elastic.co/elasticsearch/elasticsearch:8.14.3",
+		Image:         CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_ELASTICSEARCH),
 		ContainerName: "elasticsearch",
 		Profiles:      []string{"elasticsearch"},
 		Restart:       "always",

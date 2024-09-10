@@ -1,6 +1,7 @@
 package VectorDB
 
 import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
 	Define "github.com/soulteary/dify-easy/define"
 	Fn "github.com/soulteary/dify-easy/fn"
 )
@@ -26,7 +27,7 @@ type MilvusEtcdEnvironment struct {
 func CreateMilvusEtcd() MilvusEtcd {
 	config := MilvusEtcd{
 		ContainerName: "milvus-etcd",
-		Image:         "quay.io/coreos/etcd:v3.5.5",
+		Image:         CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_MILVUS_ETCD),
 		Profiles:      []string{"milvus"},
 		Environment: MilvusEtcdEnvironment{
 			ETCD_AUTO_COMPACTION_MODE:      "${ETCD_AUTO_COMPACTION_MODE:-revision}",
@@ -73,7 +74,7 @@ type MilvusMinioEnvironment struct {
 func CreateMilvusMinio() MilvusMinio {
 	config := MilvusMinio{
 		ContainerName: "milvus-minio",
-		Image:         "minio/minio:RELEASE.2023-03-20T20-16-18Z",
+		Image:         CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_MILVUS_MINIO),
 		Profiles:      []string{"milvus"},
 		Environment: MilvusMinioEnvironment{
 			MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY:-minioadmin}",
@@ -95,7 +96,6 @@ func CreateMilvusMinio() MilvusMinio {
 		config.Healthcheck.Timeout = "20s"
 		config.Healthcheck.Retries = 3
 	}
-
 	return config
 }
 
@@ -121,7 +121,7 @@ type MilvusEnvironment struct {
 func CreateMilvusStandalone() MilvusStandalone {
 	config := MilvusStandalone{
 		ContainerName: "milvus-standalone",
-		Image:         "milvusdb/milvus:v2.3.1",
+		Image:         CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_MILVUS),
 		Profiles:      []string{"milvus"},
 		Environment: MilvusEnvironment{
 			ETCD_ENDPOINTS:                        "${ETCD_ENDPOINTS:-etcd:2379}",

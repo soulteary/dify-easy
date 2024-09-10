@@ -1,5 +1,10 @@
 package VectorDB
 
+import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
+)
+
 type Chroma struct {
 	Image       string            `yaml:"image"`
 	Profiles    []string          `yaml:"profiles"`
@@ -16,7 +21,7 @@ type ChromaEnvironment struct {
 
 func CreateChroma() Chroma {
 	config := Chroma{
-		Image:    "ghcr.io/chroma-core/chroma:0.5.1",
+		Image:    CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_CHROMA),
 		Profiles: []string{"chroma"},
 		Restart:  "always",
 		Volumes: []string{
