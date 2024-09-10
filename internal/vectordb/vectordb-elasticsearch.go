@@ -90,7 +90,7 @@ type KibanaEnvironment struct {
 
 func CreateKibana() Kibana {
 	config := Kibana{
-		Image:         "docker.elastic.co/kibana/kibana:8.14.3",
+		Image:         CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_ELASTICSEARCH_KIBANA),
 		ContainerName: "kibana",
 		Profiles:      []string{"elasticsearch"},
 		DependsOn:     []string{"elasticsearch"},

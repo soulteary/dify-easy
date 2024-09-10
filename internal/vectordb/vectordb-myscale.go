@@ -1,5 +1,10 @@
 package VectorDB
 
+import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
+)
+
 type Myscale struct {
 	ContainerName string   `yaml:"container_name"`
 	Image         string   `yaml:"image"`
@@ -13,7 +18,7 @@ type Myscale struct {
 func CreateMyscale() Myscale {
 	return Myscale{
 		ContainerName: "myscale",
-		Image:         "myscale/myscaledb:1.6.4",
+		Image:         CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_MYSCALE),
 		Profiles:      []string{"myscale"},
 		Restart:       "always",
 		Tty:           true,

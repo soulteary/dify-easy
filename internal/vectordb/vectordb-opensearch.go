@@ -1,5 +1,10 @@
 package VectorDB
 
+import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
+)
+
 type Opensearch struct {
 	ContainerName string                `yaml:"container_name"`
 	Image         string                `yaml:"image"`
@@ -78,7 +83,7 @@ type OpensearchDashboardsEnvironment struct {
 func CreateOpenSearchDashboards() OpensearchDashboards {
 	config := OpensearchDashboards{
 		ContainerName: "opensearch-dashboards",
-		Image:         "opensearchproject/opensearch-dashboards:latest",
+		Image:         CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_OPENSEARCH),
 		Profiles:      []string{"opensearch"},
 		Environment: OpensearchDashboardsEnvironment{
 			OPENSEARCH_HOSTS: `["https://opensearch:9200"]`,

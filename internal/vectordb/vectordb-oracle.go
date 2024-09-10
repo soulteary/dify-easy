@@ -1,5 +1,10 @@
 package VectorDB
 
+import (
+	CustomConfig "github.com/soulteary/dify-easy/custom-config"
+	Define "github.com/soulteary/dify-easy/define"
+)
+
 type Oracle struct {
 	Image       string            `yaml:"image"`
 	Profiles    []string          `yaml:"profiles"`
@@ -15,7 +20,7 @@ type OracleEnvironment struct {
 
 func CreateOracle() Oracle {
 	config := Oracle{
-		Image:    "container-registry.oracle.com/database/free:latest",
+		Image:    CustomConfig.GetImage(Define.DOCKER_SERVICE_VDB_ORACLE),
 		Profiles: []string{"oracle"},
 		Restart:  "always",
 		Volumes: []interface{}{
